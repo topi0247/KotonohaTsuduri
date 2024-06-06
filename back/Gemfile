@@ -1,0 +1,34 @@
+source "https://rubygems.org"
+
+ruby "3.2.3"
+gem "rails", "~> 7.1.3", ">= 7.1.3.4"
+gem "mysql2", "~> 0.5"
+gem "puma", ">= 5.0"
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "bootsnap", require: false
+
+gem "rack-cors"
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri windows ]
+end
+
+group :development do
+end
+
+# .envを使うため
+gem 'dotenv-rails'
+# フロントとバックを分けているので同じサイト判定させるためのgem
+gem 'rails_same_site_cookie'
+# 認証
+gem "devise"
+# トークンの方はRails7に対応していないので、githubから取得
+gem 'devise_token_auth', '>= 1.2.0', git: 'https://github.com/lynndylanhurley/devise_token_auth'
+# 多言語用
+gem 'devise-i18n'
+# OAuth2.0用
+gem 'omniauth'
+# Googleの認証用
+gem 'omniauth-google-oauth2'
+# CSRF対策用
+gem "omniauth-rails_csrf_protection"
