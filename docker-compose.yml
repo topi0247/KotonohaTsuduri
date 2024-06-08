@@ -32,6 +32,8 @@ services:
     build:
       context: ./front/
       dockerfile: Dockerfile
+    environment:
+      - NODE_PATH=/app/node_modules
     volumes:
       - ./front:/app
     command: yarn dev -p 8000

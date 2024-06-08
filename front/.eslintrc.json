@@ -1,3 +1,83 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "next/core-web-vitals",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "import",
+    "@typescript-eslint"
+  ],
+  "root": true,
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          [
+            "parent",
+            "sibling"
+          ],
+          "object",
+          "type",
+          "index"
+        ],
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@/src/utils/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/src/lib/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/src/config/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/src/hooks/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/src/components/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/src/features/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/src/types/**",
+            "group": "internal",
+            "position": "before"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
+  }
 }

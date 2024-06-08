@@ -2,7 +2,8 @@ FROM node:21.5.0
 
 WORKDIR /app
 
-# ここから追記
+ENV NODE_PATH=/app/node_modules
+
 COPY package.json yarn.lock ./
 RUN yarn install
 COPY . .
