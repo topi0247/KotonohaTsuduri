@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 
-// https://nextjs.org/docs/app/api-reference/functions/cookies
 export default function getToken() {
   // アクセストークン
   const accessToken = Cookies.get("access-token");

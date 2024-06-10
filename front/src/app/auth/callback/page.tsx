@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { getEnv } from "@/config";
 
 export default function AuthCallbackPage() {
-  // https://nextjs.org/docs/app/api-reference/functions/use-search-params
   const searchParams = useSearchParams();
 
   useEffect(() => {
