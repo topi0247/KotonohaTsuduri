@@ -1,0 +1,2 @@
+class PostGenre < ApplicationRecord
+end

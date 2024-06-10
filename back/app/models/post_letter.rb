@@ -1,0 +1,2 @@
+class PostLetter < ApplicationRecord
+end

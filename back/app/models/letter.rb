@@ -1,0 +1,2 @@
+class Letter < ApplicationRecord
+end
