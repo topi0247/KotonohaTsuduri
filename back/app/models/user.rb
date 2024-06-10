@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: %i[google_oauth2]
   include DeviseTokenAuth::Concerns::User
 
+  has_many :letters, dependent: :destroy
+
   def self.find_or_create_by_oauth(auth)
     transaction do
       user = find_by(uid: auth.uid)
