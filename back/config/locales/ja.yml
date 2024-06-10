@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        uid: uid
+        provider: provider
+        uuid: uuid
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: が入力されていません
+              too_long: は%{count}文字以内で入力してください
+            uuid:
+              blank: が入力されていません
+              invalid: が不正です
+              uniqueness: は既に使用されています
