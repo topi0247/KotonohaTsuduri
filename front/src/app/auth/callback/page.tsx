@@ -1,11 +1,11 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 import { getEnv } from "@/config";
 
-export default function AuthCallbackPage() {
+function AuthCallbackPageContent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -34,4 +34,13 @@ export default function AuthCallbackPage() {
       window.close();
     }
   }, []);
+  return <></>;
+}
+
+export default function AuthCallbackPage() {
+  return (
+    <Suspense fallback={<></>}>
+      <AuthCallbackPageContent />
+    </Suspense>
+  );
 }
