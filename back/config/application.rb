@@ -40,5 +40,14 @@ module App
     # タイムゾーンを日本時間に設定
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
+    # i18nの設定
+    config.i18n.default_locale = :ja
+    # Cookieを使うための設定
+    config.middleware.use ActionDispatch::Cookies
+    # セッションを使うための設定
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_kotonoha_tsuduri_token'
+    # Cookieで同じサイトを扱うための設定
+    config.action_dispatch.cookies_same_site_protection = :none
+    config.action_controller.forgery_protection_origin_check = false
   end
 end

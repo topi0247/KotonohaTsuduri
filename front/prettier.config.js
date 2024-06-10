@@ -4,8 +4,7 @@ module.exports = {
     project: 'tsconfig.json',
   },
   plugins: ['prettier-plugin-tailwindcss'],
-  semi: false,
-  printWidth: 90,
+  printWidth: 100,
   tabWidth: 2,
   trailingComma: "all",
 }

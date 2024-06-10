@@ -11,12 +11,14 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^7.12.0",
     "@typescript-eslint/parser": "^7.12.0",
     "axios": "^1.7.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "husky": "^9.0.11",
+    "js-cookie": "^3.0.5",
     "lint-staged": "^15.2.5",
     "next": "14.2.3",
     "prettier": "^3.3.1",
