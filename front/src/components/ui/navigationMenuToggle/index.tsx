@@ -1,9 +1,7 @@
 import { SVGMotionProps, motion } from "framer-motion";
-import { JSX, RefAttributes } from "react";
+import { JSX } from "react";
 
-const Path = (
-  props: JSX.IntrinsicAttributes & SVGMotionProps<SVGPathElement> & RefAttributes<SVGPathElement>,
-) => (
+const Path = (props: SVGMotionProps<SVGPathElement> & JSX.IntrinsicElements["path"]) => (
   <motion.path fill="transparent" strokeWidth="3" stroke="white" strokeLinecap="round" {...props} />
 );
 
@@ -27,10 +25,9 @@ export const NavigationMenuToggle = ({
         animate={isOpen ? "open" : "closed"}
       />
       <Path
-        d="M 3 12 L 21 12"
         variants={{
-          closed: { opacity: 1 },
-          open: { opacity: 0 },
+          closed: { opacity: 1, d: "M 3 12 L 21 12" },
+          open: { opacity: 0, d: "M 3 12 L 21 12" },
         }}
         transition={{ duration: 0.1 }}
         animate={isOpen ? "open" : "closed"}
