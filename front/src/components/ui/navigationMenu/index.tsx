@@ -24,28 +24,28 @@ const divVariants = {
   },
 };
 
-const menuItems = [
-  {
+const menuItems = {
+  login: {
     href: Routes.login,
     word: "はろーわーるど",
   },
-  {
+  newPost: {
     href: Routes.newPost,
     word: "手紙を綴る",
   },
-  {
+  posts: {
     href: Routes.posts,
     word: "届いた手紙",
   },
-  {
+  user: {
     href: Routes.user("1"),
     word: "綴った手紙",
   },
-  {
+  logout: {
     href: Routes.logout,
     word: "しーゆーわーるど",
   },
-];
+};
 
 export const NavigationMenu = ({
   isVisible,
@@ -80,14 +80,35 @@ export const NavigationMenu = ({
         variants={variants}
         className={`absolute flex w-full flex-col items-center justify-center bg-slate-200 py-4 ${isVisible ? "" : "hidden md:block"}`}
       >
-        {menuItems.map((item, i) => (
-          <NavigationMenuItem
-            key={i}
-            href={item.href}
-            word={item.word}
-            handleToggle={handleToggle}
-          />
-        ))}
+        <NavigationMenuItem
+          href={menuItems.login.href}
+          word={menuItems.login.word}
+          handleToggle={handleToggle}
+        />
+
+        <NavigationMenuItem
+          href={menuItems.newPost.href}
+          word={menuItems.newPost.word}
+          handleToggle={handleToggle}
+        />
+
+        <NavigationMenuItem
+          href={menuItems.posts.href}
+          word={menuItems.posts.word}
+          handleToggle={handleToggle}
+        />
+
+        <NavigationMenuItem
+          href={menuItems.user.href}
+          word={menuItems.user.word}
+          handleToggle={handleToggle}
+        />
+
+        <NavigationMenuItem
+          href={menuItems.logout.href}
+          word={menuItems.logout.word}
+          handleToggle={handleToggle}
+        />
       </motion.ul>
     </motion.div>
   );
