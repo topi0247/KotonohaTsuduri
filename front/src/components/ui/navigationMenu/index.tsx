@@ -74,7 +74,7 @@ export const NavigationMenu = ({
     <motion.div
       id="menuDiv"
       variants={divVariants}
-      className="fixed left-0 top-0 flex h-full w-full cursor-default flex-col items-center justify-center"
+      className={`fixed left-0 top-0 flex h-full w-full cursor-default flex-col items-center justify-center bg-black bg-opacity-50 ${isVisible ? "" : "hidden"}`}
     >
       <motion.ul
         variants={variants}

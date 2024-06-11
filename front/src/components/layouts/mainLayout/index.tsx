@@ -6,7 +6,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <header>
         <Layout.Headers />
       </header>
-      <main className="flex-grow">{children}</main>
+      <main className="mx-8 my-4 flex-grow">{children}</main>
       <footer>
         <Layout.Footers />
       </footer>

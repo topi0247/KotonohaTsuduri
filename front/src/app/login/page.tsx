@@ -39,7 +39,6 @@ export default function Login() {
   useEffect(() => {
     if (!isLogged) return;
     const tokens = Lib.getToken();
-    console.log(tokens.accessToken, tokens.uid, tokens.expiry, tokens.client);
     if (tokens.accessToken && tokens.uid && tokens.expiry && tokens.client) {
       router.push(Config.Routes.home);
       return;
