@@ -1,7 +1,7 @@
+@import "@mantine/core/styles.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 /* ================================== */
 /*            GoogleFonts             */
@@ -142,4 +142,39 @@
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
   background-color: #001d35;
   opacity: 8%;
+}
+
+/* ================================== */
+/*            入力フォーム            */
+/* ================================== */
+.lined-textarea {
+  background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent calc(1.5rem - 1px),
+      #bae6fd calc(1.5rem - 1px),
+      #bae6fd 1.5rem
+    ),
+    linear-gradient(
+      to right,
+      #bae6fd 0%,
+      #bae6fd 25%,
+      transparent 25%,
+      transparent 50%,
+      #bae6fd 50%,
+      #bae6fd 75%,
+      transparent 75%,
+      transparent 100%
+    );
+  background-size:
+    100% 1.5rem,
+    10px 1px;
+  background-repeat: repeat-y, repeat-x;
+  background-position:
+    0 0,
+    0 calc(1.5rem - 1px);
+}
+
+*:focus-visible {
+  outline: none;
 }

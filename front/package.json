@@ -11,6 +11,9 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@mantine/core": "^7.10.1",
+    "@mantine/form": "^7.10.1",
+    "@mantine/hooks": "^7.10.1",
     "@next/font": "^14.2.3",
     "@types/js-cookie": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^7.12.0",
