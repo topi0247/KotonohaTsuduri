@@ -57,7 +57,6 @@ export const NavigationMenu = ({
   handleToggle: () => void;
 }) => {
   const user = useRecoilValue(userState);
-  const isLogged = user.uuid !== "";
 
   useEffect(() => {
     const menudiv = document.getElementById("menuDiv");
@@ -74,6 +73,10 @@ export const NavigationMenu = ({
       document.removeEventListener("click", handleClick);
     };
   }, []);
+
+  const isLogged = () => {
+    return user.uuid !== "";
+  };
 
   return (
     <motion.div
@@ -93,7 +96,7 @@ export const NavigationMenu = ({
         />
 
         {/* 新規投稿 */}
-        {isLogged && (
+        {isLogged() && (
           <NavigationMenuItem
             href={menuItems.newPost.href}
             word={menuItems.newPost.word}
@@ -108,7 +111,7 @@ export const NavigationMenu = ({
           handleToggle={handleToggle}
         />
 
-        {isLogged && (
+        {isLogged() && (
           <>
             {/* マイページ */}
             <NavigationMenuItem

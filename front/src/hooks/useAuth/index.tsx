@@ -10,7 +10,7 @@ export const useAuth = () => {
 
   const autoLogin = async () => {
     const token = getToken();
-    if (!token || user.uuid !== "") return;
+    if (!token.accessToken || user.uuid !== "") return;
 
     try {
       const res = await axiosClient().get("/auth/validate_token");

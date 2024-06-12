@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 
 import * as Config from "@/config";
 import { GoogleLoginButton } from "@/features/auth";
+import { useAuth } from "@/hooks";
 import * as Lib from "@/lib";
 
 export default function Login() {
   const router = useRouter();
+  const { autoLogin } = useAuth();
   const [isLogged, setIsLogged] = useState(false);
   const url = Config.getEnv("API_URL");
   const SECONDS = 1000;
@@ -24,6 +26,7 @@ export default function Login() {
       if ("accessToken" in data) {
         const { accessToken, uid, expiry, client } = data;
         Lib.setToken({ accessToken, uid, expiry, client });
+        autoLogin();
       }
 
       setIsLogged(true);
