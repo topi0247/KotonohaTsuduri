@@ -178,3 +178,34 @@
 *:focus-visible {
   outline: none;
 }
+
+.mantine-TagsInput-pill {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #ff8800;
+  color: #ff8800;
+}
+
+.mantine-Pill-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================== */
+/*                 UI                 */
+/* ================================== */
+.stripe-pattern {
+  position: relative;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(165, 247, 253, 0.514),
+    rgba(165, 247, 253, 0.514) 10px,
+    #fff 0,
+    #fff 20px
+  );
+  border-left: 2px dotted rgba(0, 0, 0, 0.1);
+  border-right: 2px dotted rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(-4px) translateY(3px) rotateZ(-5deg);
+}
