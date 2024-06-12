@@ -1,5 +1,6 @@
 import "./globals.css";
 import * as Layouts from "@/components/layouts";
+import * as Provider from "@/provider";
 
 import type { Metadata } from "next";
 
@@ -24,7 +25,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Layouts.MainLayout>{children}</Layouts.MainLayout>
+        <Provider.Provider>
+          <Layouts.MainLayout>{children}</Layouts.MainLayout>
+        </Provider.Provider>
       </body>
     </html>
   );

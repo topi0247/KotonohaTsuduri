@@ -6,7 +6,7 @@ import { getToken } from "@/lib";
 export default function axiosClient() {
   const tokens = getToken();
   const client = axios.create({
-    baseURL: getEnv("API_URL") || getEnv("NEXT_PUBLIC_API_URL") || "",
+    baseURL: getEnv("API_URL"),
     headers: {
       "Content-Type": "application/json",
     },
