@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 
 import { NavigationMenuItem } from "@/components/ui";
 import { Routes } from "@/config";
+import { userState } from "@/hooks";
 
 const variants = {
   open: {
@@ -37,10 +39,10 @@ const menuItems = {
     href: Routes.posts,
     word: "届いた手紙",
   },
-  user: {
-    href: Routes.user("1"),
+  user: (uuid: string) => ({
+    href: Routes.user(uuid),
     word: "綴った手紙",
-  },
+  }),
   logout: {
     href: Routes.logout,
     word: "しーゆーわーるど",
@@ -54,6 +56,9 @@ export const NavigationMenu = ({
   isVisible: boolean;
   handleToggle: () => void;
 }) => {
+  const user = useRecoilValue(userState);
+  const isLogged = user.uuid !== "";
+
   useEffect(() => {
     const menudiv = document.getElementById("menuDiv");
     if (!menudiv) return;
@@ -80,35 +85,46 @@ export const NavigationMenu = ({
         variants={variants}
         className={`absolute flex w-full flex-col items-center justify-center bg-slate-200 py-4 ${isVisible ? "" : "hidden md:block"}`}
       >
+        {/* ログインとアプリ紹介 */}
         <NavigationMenuItem
           href={menuItems.login.href}
           word={menuItems.login.word}
           handleToggle={handleToggle}
         />
 
-        <NavigationMenuItem
-          href={menuItems.newPost.href}
-          word={menuItems.newPost.word}
-          handleToggle={handleToggle}
-        />
+        {/* 新規投稿 */}
+        {isLogged && (
+          <NavigationMenuItem
+            href={menuItems.newPost.href}
+            word={menuItems.newPost.word}
+            handleToggle={handleToggle}
+          />
+        )}
 
+        {/* 投稿一覧 */}
         <NavigationMenuItem
           href={menuItems.posts.href}
           word={menuItems.posts.word}
           handleToggle={handleToggle}
         />
 
-        <NavigationMenuItem
-          href={menuItems.user.href}
-          word={menuItems.user.word}
-          handleToggle={handleToggle}
-        />
+        {isLogged && (
+          <>
+            {/* マイページ */}
+            <NavigationMenuItem
+              href={menuItems.user("1").href}
+              word={menuItems.user("1").word}
+              handleToggle={handleToggle}
+            />
 
-        <NavigationMenuItem
-          href={menuItems.logout.href}
-          word={menuItems.logout.word}
-          handleToggle={handleToggle}
-        />
+            {/* ログアウト */}
+            <NavigationMenuItem
+              href={menuItems.logout.href}
+              word={menuItems.logout.word}
+              handleToggle={handleToggle}
+            />
+          </>
+        )}
       </motion.ul>
     </motion.div>
   );
