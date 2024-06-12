@@ -30,7 +30,7 @@ export default function Textarea({
       <small
         className={`block text-end text-sm text-gray-500 ${isLetterLengthValid ? "" : "text-red-400"}`}
       >
-        {letterLength}/100000文字
+        {letterLength}/{MAX_LENGTH}文字
       </small>
     </>
   );
