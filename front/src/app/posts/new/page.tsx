@@ -8,6 +8,9 @@ import { useEffect, useState } from "react";
 import * as Form from "@/components/forms";
 import * as UI from "@/components/ui";
 import { Routes } from "@/config";
+import { NewLetter } from "@/features/posts";
+import { useNotification } from "@/hooks";
+import { NotificationType } from "@/types";
 
 const Genres = ["SF", "ファンタジー", "恋愛", "ホラー", "ミステリー", "サスペンス", "ポエム"];
 
@@ -17,6 +20,7 @@ export default function PostNew() {
   const [isPost, setIsPost] = useState(false);
   const [isPostAnimationComplete, setIsPostAnimationComplete] = useState(false);
   const [isPostComplete, setIsPostComplete] = useState(false);
+  const { setNewNotification } = useNotification();
   const router = useRouter();
   const MAX_NAME_LENGTH = 10;
   const MAX_SENTENCE_LENGTH = 100000;
@@ -46,6 +50,11 @@ export default function PostNew() {
 
   useEffect(() => {
     if (isPostComplete && isPostAnimationComplete) {
+      setNewNotification({
+        title: "せいこう！",
+        message: "手紙を投函しました",
+        type: NotificationType.SUCCESS,
+      });
       router.push(Routes.home);
     }
   }, [isPostComplete, isPostAnimationComplete]);
@@ -55,13 +64,32 @@ export default function PostNew() {
   };
 
   const handleSubmit = async () => {
-    togglePost();
+    const { name, letter: letterData, genres, tags } = form.getValues();
+
+    const letter = {
+      letter: {
+        name,
+        sentences: letterData,
+        genres,
+        tags,
+      },
+    };
 
     try {
-      // TODO : 投稿処理をここに書く
+      const res = await NewLetter(letter);
+      if (res.status || res.data.success !== true) {
+        throw new Error(res.data.message);
+      }
+
+      togglePost();
       setIsPostComplete(true);
     } catch (error) {
       console.error(error);
+      setNewNotification({
+        title: "しっぱい...",
+        message: "手紙の投函に失敗しました",
+        type: NotificationType.ERROR,
+      });
     }
   };
 

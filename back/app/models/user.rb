@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :letters, dependent: :destroy
 
+  before_validation :set_default_uuid, on: :create
+
   def self.find_or_create_by_oauth(auth)
     transaction do
       user = find_by(uid: auth.uid)
@@ -16,19 +18,16 @@ class User < ActiveRecord::Base
           newName = newName[0..9]
         end
         user = User.new(uid: auth.uid, provider: auth.provider, name: newName)
-        user.save
+        unless user.save
+          raise ActiveRecord::Rollback
+        end
       end
       user
     end
   end
 
-  def get_short_uuid
-    Rails.logger.debug("uuid: #{uuid}")
-    Base64.urlsafe_encode64([uuid.delete('-')].pack("H*")).tr('=', '')
-  end
-
-  def self.find_by_shot_uuid(shot_uuid)
-    uuid = Base64.urlsafe_decode64(shot_uuid + '=' * (4 - shot_uuid.length % 4)).unpack("H*")[0]
-    find_by(uuid: uuid.scan(/.{8}|.+/).join('-'))
+  def set_default_uuid
+    encode_uuid = Base64.urlsafe_encode64([uuid.delete('-')].pack("H*")).tr('=', '')
+    self.uuid = encode_uuid
   end
 end

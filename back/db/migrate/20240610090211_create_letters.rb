@@ -1,9 +1,9 @@
 class CreateLetters < ActiveRecord::Migration[7.1]
   def change
     create_table :letters do |t|
-      t.string :uuid, :null => false, :default => "UUID()"
+      t.string :uuid, :null => false
       t.text :sentences, :null => false, :limit => 100000
-      t.string :name, :null => false, :limit => 10
+      t.string :name, :null => false, :limit => 10, :default => '名もなき人'
       t.references :post, :null => false, :default => 0
       t.references :user, :null => false, :default => 0
       t.timestamps

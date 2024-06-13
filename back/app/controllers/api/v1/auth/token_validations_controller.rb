@@ -5,7 +5,7 @@ class Api::V1::Auth::TokenValidationsController < DeviseTokenAuth::TokenValidati
     render json: {
       success: true,
       user: {
-        uuid: @resource.get_short_uuid,
+        uuid: @resource.uuid,
         name: @resource.name,
       }
     }

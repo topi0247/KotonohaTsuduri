@@ -19,9 +19,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_090303) do
   end
 
   create_table "letters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "uuid", default: "UUID()", null: false
+    t.string "uuid", null: false
     t.text "sentences", size: :medium, null: false
-    t.string "name", limit: 10, null: false
+    t.string "name", limit: 10, default: "名もなき人", null: false
     t.bigint "post_id", default: 0, null: false
     t.bigint "user_id", default: 0, null: false
     t.datetime "created_at", null: false
