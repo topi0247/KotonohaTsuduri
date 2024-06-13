@@ -95,6 +95,13 @@ export const NavigationMenu = ({
           handleToggle={handleToggle}
         />
 
+        {/* 投稿一覧 */}
+        <NavigationMenuItem
+          href={menuItems.posts.href}
+          word={menuItems.posts.word}
+          handleToggle={handleToggle}
+        />
+
         {/* 新規投稿 */}
         {isLogged() && (
           <NavigationMenuItem
@@ -103,13 +110,6 @@ export const NavigationMenu = ({
             handleToggle={handleToggle}
           />
         )}
-
-        {/* 投稿一覧 */}
-        <NavigationMenuItem
-          href={menuItems.posts.href}
-          word={menuItems.posts.word}
-          handleToggle={handleToggle}
-        />
 
         {isLogged() && (
           <>
