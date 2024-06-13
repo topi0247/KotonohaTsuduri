@@ -11,7 +11,11 @@ class Api::V1::PostsController < Api::V1::BasesController
   def show
     post = Post.includes(:genres, :tags, letters: :user).find_by(uuid: params[:id])
     page = params[:page].present? ? params[:page].to_i : 1
-    letter = post.letters.per_page(page).first
-    render json: { letter: letter.as_custom_json, all_count: post.letters.count }, status: :ok
+    letter = page <= post.letters.count ? post.letters.per_page(page).first : nil
+    if letter.nil?
+      render json: { letter: nil, all_count: post.letters.count }, status: :ok
+    else
+      render json: { letter: letter.as_custom_json, all_count: post.letters.count }, status: :ok
+    end
   end
 end

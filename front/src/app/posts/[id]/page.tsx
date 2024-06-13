@@ -24,6 +24,8 @@ export default function Post({ params }: { params: { id: string } }) {
 
   const onChange = (value: number) => {
     setPage(value);
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -69,6 +71,9 @@ function Letter({
   if (data === undefined) {
     return <p>ちょっとまってね</p>;
   }
+
+  if (data.letter == null) return;
+
   return (
     <div className="w-full max-w-[800px] flex-grow">
       <h1 className="text-center text-xl">とある手紙の物語</h1>
