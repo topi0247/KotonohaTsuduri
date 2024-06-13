@@ -8,5 +8,10 @@ class Api::V1::PostsController < Api::V1::BasesController
     render json: { posts: posts_paginated.map(&:as_custom_index_json), all_count: Post.all.count }, status: :ok
   end
 
-  def show; end
+  def show
+    post = Post.includes(:genres, :tags, letters: :user).find_by(uuid: params[:id])
+    page = params[:page].present? ? params[:page].to_i : 1
+    letter = post.letters.per_page(page).first
+    render json: { tags: post.tags.map(&:name), genres: post.genres.map(&:name) , letter: letter.as_custom_json, all_count: post.letters.count }, status: :ok
+  end
 end
