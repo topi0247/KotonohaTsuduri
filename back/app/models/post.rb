@@ -36,4 +36,16 @@ class Post < ApplicationRecord
       post_genres.build(genre: genre)
     end
   end
+
+  def as_custom_index_json
+    {
+      uuid: uuid,
+      letters: {
+        name: letters.first.name,
+        sentences: letters.first.sentences.slice(0, 140),
+      },
+      genres: genres.map(&:name),
+      tags: tags.map(&:name),
+    }
+  end
 end
