@@ -28,7 +28,7 @@ const divVariants = {
 
 const menuItems = {
   login: {
-    href: Routes.login,
+    href: Routes.home,
     word: "はろーわーるど",
   },
   newPost: {
@@ -43,10 +43,10 @@ const menuItems = {
     href: Routes.user(uuid),
     word: "綴った手紙",
   }),
-  logout: {
-    href: Routes.logout,
-    word: "しーゆーわーるど",
-  },
+  // logout: {
+  //   href: Routes.logout,
+  //   word: "しーゆーわーるど",
+  // },
 };
 
 export const NavigationMenu = ({
@@ -121,11 +121,11 @@ export const NavigationMenu = ({
             />
 
             {/* ログアウト */}
-            <NavigationMenuItem
+            {/* <NavigationMenuItem
               href={menuItems.logout.href}
               word={menuItems.logout.word}
               handleToggle={handleToggle}
-            />
+            /> */}
           </>
         )}
       </motion.ul>

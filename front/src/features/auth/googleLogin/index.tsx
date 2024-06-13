@@ -2,12 +2,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { GoogleLoginButton } from "@/components/ui";
 import * as Config from "@/config";
-import { GoogleLoginButton } from "@/features/auth";
 import { useAuth } from "@/hooks";
 import * as Lib from "@/lib";
 
-export default function Login() {
+export default function GoogleLogin() {
   const router = useRouter();
   const { autoLogin } = useAuth();
   const [isLogged, setIsLogged] = useState(false);
@@ -43,7 +43,7 @@ export default function Login() {
     if (!isLogged) return;
     const tokens = Lib.getToken();
     if (tokens.accessToken && tokens.uid && tokens.expiry && tokens.client) {
-      router.push(Config.Routes.home);
+      router.push(Config.Routes.posts);
       return;
     }
 
@@ -71,14 +71,5 @@ export default function Login() {
     }, SECONDS);
   };
 
-  return (
-    <article>
-      <section>
-        <h1>筆をとる</h1>
-        <div>
-          <GoogleLoginButton onClick={handlePopup} />
-        </div>
-      </section>
-    </article>
-  );
+  return <GoogleLoginButton onClick={handlePopup} />;
 }

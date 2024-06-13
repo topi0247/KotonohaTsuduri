@@ -21,5 +21,8 @@
   "eslint.workingDirectories": [
     "./front"
   ],
-  "editor.fontFamily": "NasuM,Consolas, 'Courier New', monospace"
+  "editor.fontFamily": "NasuM,Consolas, 'Courier New', monospace",
+  "cSpell.words": [
+    "formfacade"
+  ]
 }
