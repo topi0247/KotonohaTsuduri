@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
   end
 
   def set_default_uuid
-    encode_uuid = Base64.urlsafe_encode64([uuid.delete('-')].pack("H*")).tr('=', '')
+    new_uuid = SecureRandom.uuid
+    encode_uuid = Base64.urlsafe_encode64([new_uuid.delete('-')].pack("H*")).tr('=', '')
     self.uuid = encode_uuid
   end
 end

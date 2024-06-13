@@ -18,7 +18,7 @@ export default function Notification() {
       const timeoutId = setTimeout(() => {
         closeNotification();
         clearTimeout(timeoutId);
-      }, 5000);
+      }, 3000);
     }
   }, [notification]);
 
