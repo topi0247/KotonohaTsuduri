@@ -1,4 +1,7 @@
+"use client";
+
 import * as Layout from "@/components/layouts";
+import { Notification } from "@/components/ui";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -6,6 +9,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <header>
         <Layout.Headers />
       </header>
+      <Notification />
       <main className="mx-4 my-4 flex-grow">{children}</main>
       <footer>
         <Layout.Footers />

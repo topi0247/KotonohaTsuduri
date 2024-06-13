@@ -5,6 +5,11 @@ Rails.application.routes.draw do
         omniauth_callbacks: 'api/v1/auth/omniauth_callbacks',
         token_validations:  'api/v1/auth/token_validations',
       }
+      resources :posts, only: [:index, :show] do
+        member do
+          resource :letter, only: [:create]
+        end
+      end
     end
   end
   root 'application#index'

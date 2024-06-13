@@ -1,3 +1,3 @@
-import NewPost from "./newPost";
+import NewLetter from "./newLetter";
 
-export { NewPost };
+export { NewLetter };
