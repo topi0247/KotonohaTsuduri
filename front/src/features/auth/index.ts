@@ -1,4 +1,4 @@
 import { getUser } from "./getUser";
-import GoogleLoginButton from "./googltLoginButton";
+import GoogleLogin from "./googleLogin";
 
-export { getUser, GoogleLoginButton };
+export { getUser, GoogleLogin };

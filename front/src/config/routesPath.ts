@@ -1,6 +1,5 @@
 const Routes = {
   home: "/",
-  login: "/login",
   logout: "/logout",
   users: "/users",
   user: (id: string) => `/users/${id}`,
