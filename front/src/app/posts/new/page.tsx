@@ -77,14 +77,13 @@ export default function PostNew() {
 
     try {
       const res = await NewLetter(letter);
-      if (res.status || res.data.success !== true) {
-        throw new Error(res.data.message);
+      if (!res.status) {
+        throw new Error(res.data);
       }
 
       togglePost();
       setIsPostComplete(true);
     } catch (error) {
-      console.error(error);
       setNewNotification({
         title: "しっぱい...",
         message: "手紙の投函に失敗しました",
@@ -117,6 +116,7 @@ export default function PostNew() {
                 <Form.Textarea
                   onChange={form.getInputProps("letter").onChange}
                   value={form.getValues().letter}
+                  placeholder="拝啓..."
                 />
               </div>
 

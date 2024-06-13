@@ -16,10 +16,10 @@ class Api::V1::LettersController < Api::V1::BasesController
       post.letters << letter
 
       if post.save
-      render json: { success: true, message: "投函しました" }, status: :created
+        render json: { success: true, message: "投函しました" }, status: :created
       else
-      render json: { success: false,  message: post.errors.full_messages.join(", ")}, status: :internal_server_error
-      raise ActiveRecord::Rollback
+        render json: { success: false,  message: post.errors.full_messages.join(", ")}, status: :internal_server_error
+        raise ActiveRecord::Rollback
       end
     end
   end
