@@ -37,7 +37,7 @@ const menuItems = {
   },
   posts: {
     href: Routes.posts,
-    word: "届いた手紙",
+    word: "みんなの手紙",
   },
   user: (uuid: string) => ({
     href: Routes.user(uuid),
@@ -82,7 +82,7 @@ export const NavigationMenu = ({
     <motion.div
       id="menuDiv"
       variants={divVariants}
-      className={`fixed left-0 top-0 flex h-full w-full cursor-default flex-col items-center justify-center bg-black bg-opacity-50 ${isVisible ? "" : "hidden"}`}
+      className={`fixed left-0 top-0 z-30 flex h-full w-full cursor-default flex-col items-center justify-center bg-black bg-opacity-50 ${isVisible ? "" : "hidden"}`}
     >
       <motion.ul
         variants={variants}
@@ -95,6 +95,13 @@ export const NavigationMenu = ({
           handleToggle={handleToggle}
         />
 
+        {/* 投稿一覧 */}
+        <NavigationMenuItem
+          href={menuItems.posts.href}
+          word={menuItems.posts.word}
+          handleToggle={handleToggle}
+        />
+
         {/* 新規投稿 */}
         {isLogged() && (
           <NavigationMenuItem
@@ -103,13 +110,6 @@ export const NavigationMenu = ({
             handleToggle={handleToggle}
           />
         )}
-
-        {/* 投稿一覧 */}
-        <NavigationMenuItem
-          href={menuItems.posts.href}
-          word={menuItems.posts.word}
-          handleToggle={handleToggle}
-        />
 
         {isLogged() && (
           <>

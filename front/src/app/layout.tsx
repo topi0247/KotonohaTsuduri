@@ -19,8 +19,14 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
+        {/* 句読点だけKlee One */}
         <link
-          href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Klee+One&text=、。&display=swap"
+          rel="stylesheet"
+        />
+        {/* 基本の文字はLXGW WenKai TC */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap"
           rel="stylesheet"
         />
       </head>

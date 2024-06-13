@@ -5,7 +5,7 @@ import { Notification } from "@/components/ui";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="lxgw-wenkai-tc-regular flex min-h-screen flex-col bg-sky-100">
+    <div className="flex min-h-screen flex-col bg-sky-100">
       <header>
         <Layout.Headers />
       </header>

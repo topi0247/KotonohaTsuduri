@@ -54,7 +54,7 @@ export default function Top() {
 
   return (
     <Motion.motion.article
-      className={`fixed left-0 top-0 z-50 h-full min-h-screen w-full ${isVisible ? "" : "hidden"}`}
+      className={`fixed left-0 top-0 z-50 h-screen w-screen ${isVisible ? "" : "hidden"}`}
     >
       <Motion.motion.h1
         variants={variantsH1}

@@ -14,7 +14,7 @@ export const NavigationMenuToggle = ({
 }) => (
   <button
     onClick={toggle}
-    className="fixed bottom-0 right-0 m-4 flex items-center justify-center rounded-full bg-sky-300 p-2 md:bottom-auto md:top-0"
+    className="fixed bottom-0 right-0 z-30 m-4 flex items-center justify-center rounded-full bg-sky-300 p-2 md:bottom-auto md:top-0"
   >
     <svg width="30" height="30" viewBox="0 0 24 24">
       <Path

@@ -38,13 +38,13 @@ export default function Headers() {
   return (
     <>
       <div className="relative w-full">
-        <h1 className="border-b border-dashed border-sky-300 bg-white py-2 text-center text-2xl md:py-6">
+        <h1 className="z-30 border-b border-dashed border-sky-300 bg-white py-2 text-center text-2xl md:py-6">
           <Link href={Routes.home}>言の葉つづり</Link>
         </h1>
         <Motion.motion.nav
           id="menu"
           animate={isOpen ? "open" : "closed"}
-          className={isOpen ? "absolute left-0 top-0 z-50 w-full bg-black bg-opacity-40" : ""}
+          className={`z-50 ${isOpen ? "absolute left-0 top-0 w-full bg-black bg-opacity-40" : ""}`}
           onAnimationComplete={handleAnimationComplete}
         >
           <UI.NavigationMenu isVisible={isVisible} handleToggle={handleToggle} />
