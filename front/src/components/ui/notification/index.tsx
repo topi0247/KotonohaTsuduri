@@ -46,9 +46,14 @@ export default function Notification() {
       variants={variants}
       initial="hidden"
       animate={notification.open ? "visible" : "hidden"}
-      className="fixed right-0 top-16 z-10 ml-auto w-2/3"
+      className="fixed right-0 top-16 z-10 ml-auto w-2/3 max-w-72"
     >
-      <Mantine.Notification title={notification.title} color={getColor()} onClose={handleClose}>
+      <Mantine.Notification
+        title={notification.title}
+        color={getColor()}
+        onClose={handleClose}
+        style={{ width: "100%" }}
+      >
         {notification.message}
       </Mantine.Notification>
     </motion.div>

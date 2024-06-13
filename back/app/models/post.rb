@@ -24,16 +24,16 @@ class Post < ApplicationRecord
   def create_tags!(tag_names)
     post_tags.destroy_all
     tag_names.each do |tag_name|
-      tag = Tag.find_or_create_by!(name: tag_name)
-      post_tags.create!(tag: tag)
+      tag = Tag.find_or_create_by(name: tag_name)
+      post_tags.build(tag: tag)
     end
   end
 
   def create_genres!(genre_names)
     post_genres.destroy_all
     genre_names.each do |genre_name|
-      genre = Genre.find_or_create_by!(name: genre_name)
-      post_genres.create!(genre: genre)
+      genre = Genre.find_or_create_by(name: genre_name)
+      post_genres.build(genre: genre)
     end
   end
 end
