@@ -6,22 +6,10 @@
 /* ================================== */
 /*            GoogleFonts             */
 /* ================================== */
-.lxgw-wenkai-tc-light {
-  font-family: "LXGW WenKai TC", cursive;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.lxgw-wenkai-tc-regular {
-  font-family: "LXGW WenKai TC", cursive;
+body {
+  font-family: "Klee One", "LXGW WenKai TC", "Times New Roman", "YuMincho", "Hiragino Mincho ProN",
+    "Yu Mincho", "MS PMincho", serif;
   font-weight: 400;
-  font-style: normal;
-}
-
-.lxgw-wenkai-tc-bold {
-  font-family: "LXGW WenKai TC", cursive;
-  font-weight: 700;
-  font-style: normal;
 }
 
 /* ================================== */
@@ -195,7 +183,8 @@
 /* ================================== */
 /*                 UI                 */
 /* ================================== */
-.stripe-pattern {
+.stripe-pattern-sky,
+.mantine-Modal-header {
   position: relative;
   background: repeating-linear-gradient(
     -45deg,
@@ -206,6 +195,163 @@
   );
   border-left: 2px dotted rgba(0, 0, 0, 0.1);
   border-right: 2px dotted rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   transform: translateX(-4px) translateY(3px) rotateZ(-5deg);
+}
+
+.stripe-pattern-orange {
+  position: relative;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 238, 142, 0.514),
+    rgba(255, 238, 142, 0.514) 10px,
+    #fff 0,
+    #fff 20px
+  );
+  border-left: 2px dotted rgba(0, 0, 0, 0.1);
+  border-right: 2px dotted rgba(0, 0, 0, 0.1);
+  transform: translateX(-4px) translateY(3px) rotateZ(-5deg);
+}
+
+.mantine-Modal-content {
+  border-radius: 0%;
+}
+
+/* ================================== */
+/*                手紙                */
+/* ================================== */
+
+.envelope-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  perspective: 1000px; /* 3Dの深さを設定 */
+}
+
+.envelope {
+  width: 0;
+  height: 0;
+  z-index: 0;
+  border-style: solid;
+  border-width: 0 150px 100px 150px;
+  border-color: transparent transparent #e2e2e2 transparent;
+  box-shadow:
+    0 100px 0 0 #e2e2e2,
+    0 150px 90px 0 rgba(0, 0, 0, 0.2);
+  transform-origin: center;
+  transition: transform 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.envelope1 {
+  z-index: 5;
+  transform: rotateX(20deg) rotateY(20deg) rotateZ(-10deg);
+}
+.envelope2 {
+  z-index: 4;
+  transform: rotateX(15deg) rotateY(15deg) rotateZ(-8deg);
+}
+.envelope3 {
+  z-index: 3;
+  transform: rotateX(10deg) rotateY(10deg) rotateZ(-6deg);
+}
+.envelope4 {
+  z-index: 2;
+  transform: rotateX(5deg) rotateY(5deg) rotateZ(-4deg);
+}
+.envelope5 {
+  z-index: 1;
+  transform: rotateX(2deg) rotateY(2deg) rotateZ(-2deg);
+}
+
+.envelope:after,
+.envelope:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 100px;
+  border-style: solid;
+}
+
+.envelope:after {
+  width: 0;
+  height: 0;
+  left: 0;
+  border-width: 100px 150px 100px 0;
+  border-color: transparent #f1f1f1 transparent transparent;
+}
+
+.envelope:before {
+  width: 210px;
+  height: 180px;
+  left: -150px;
+  border-width: 200px 0 0 300px;
+  border-color: transparent transparent transparent #f1f1f1;
+}
+
+.envelope-container:hover .envelope1 {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.envelope-container:hover .envelope2 {
+  transform: rotateX(-15deg) rotateY(-15deg) rotateZ(8deg);
+}
+
+.envelope-container:hover .envelope3 {
+  transform: rotateX(-10deg) rotateY(-10deg) rotateZ(6deg);
+}
+
+.envelope-container:hover .envelope4 {
+  transform: rotateX(-5deg) rotateY(-5deg) rotateZ(4deg);
+}
+
+.envelope-container:hover .envelope5 {
+  transform: rotateX(-2deg) rotateY(-2deg) rotateZ(2deg);
+}
+
+.card {
+  width: 260px;
+  height: 220px;
+  top: 70px;
+  left: -130px;
+  z-index: -1;
+  background-color: #ffffff;
+  border-radius: 5px;
+  transition: transform 0.5s ease-in-out;
+  text-align: center;
+  letter-spacing: 0.06em;
+  padding-top: 130px;
+  color: #383838;
+}
+
+.envelope-container:hover .envelope1 .card {
+  transform: translateY(-100px);
+}
+
+.card p {
+  width: 150px;
+  margin: 0 auto;
+}
+
+.postmark {
+  position: relative;
+  margin: 0;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  border: 5px double #430;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: #430;
+  text-align: center;
+  font-size: 20px;
+  line-height: 20px;
+  -webkit-transform: rotate(16deg);
+  -ms-transform: rotate(16deg);
+  transform: rotate(16deg);
+  white-space: nowrap;
 }

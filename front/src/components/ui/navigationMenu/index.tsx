@@ -37,7 +37,7 @@ const menuItems = {
   },
   posts: {
     href: Routes.posts,
-    word: "届いた手紙",
+    word: "みんなの手紙",
   },
   user: (uuid: string) => ({
     href: Routes.user(uuid),

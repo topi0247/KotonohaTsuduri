@@ -13,7 +13,7 @@ export default function TagsInput({
 }) {
   return (
     <>
-      <Mantine.InputLabel className="stripe-pattern px-2">{label}</Mantine.InputLabel>
+      <Mantine.InputLabel className="stripe-pattern-sky px-2">{label}</Mantine.InputLabel>
       <Mantine.TagsInput
         name="genres"
         placeholder={placeholder}
