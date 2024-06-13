@@ -7,9 +7,9 @@ class Post < ApplicationRecord
 
   before_validation :set_default_uuid, on: :create
 
-  scope :per_page, ->(pege) {
+  scope :per_page, ->(page) {
     page = page.to_i
-    page = 1 if page < 1 || nil
+    page = 1 if page < 1
     limit(12).offset((page - 1) * 12)
   }
 

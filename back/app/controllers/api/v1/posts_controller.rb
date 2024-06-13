@@ -3,15 +3,10 @@ class Api::V1::PostsController < Api::V1::BasesController
 
   def index
     posts = Post.includes(:genres, :tags, letters: :user).order(created_at: :desc)
-    posts_paginated = posts.per_page(search_params[:page])
+    page = params[:page].present? ? params[:page].to_i : 1
+    posts_paginated = posts.per_page(page)
     render json: { posts: posts_paginated.map(&:as_custom_index_json), all_count: Post.all.count }, status: :ok
   end
 
   def show; end
-
-  private
-
-  def search_params
-    params.permit(:page)
-  end
 end
