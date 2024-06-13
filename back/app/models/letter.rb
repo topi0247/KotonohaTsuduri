@@ -27,6 +27,7 @@ class Letter < ApplicationRecord
     {
       name: name,
       sentences: sentences,
+      created_at: created_at.strftime('%Y/%m/%d %H:%M'),
     }
   end
 end
