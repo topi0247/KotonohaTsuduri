@@ -18,10 +18,12 @@ export default function Posts() {
   const [opened, { open, close }] = useDisclosure(false);
   const [cnt, setCnt] = useState(1);
   const [currentUuid, setCurrentUuid] = useState<string>("");
+  const [currentLettersCount, setCurrentLettersCount] = useState<number>(0);
 
-  const handleClick = (uuid: string) => {
+  const handleClick = (uuid: string, lettersCount: number) => {
     open();
     setCurrentUuid(uuid);
+    setCurrentLettersCount(lettersCount);
   };
 
   const { data: Tags } = useSWR(`/posts/${currentUuid}/tags`, fetcher);
@@ -29,7 +31,7 @@ export default function Posts() {
 
   const pages = [];
   for (let i = 1; i <= cnt; i++) {
-    pages.push(<Page key={i} index={i} onClick={handleClick} />);
+    pages.push(<Letters key={i} index={i} onClick={handleClick} />);
   }
 
   useEffect(() => {
@@ -59,7 +61,7 @@ export default function Posts() {
       <Modal opened={opened} onClose={close} title="どんな手紙？">
         <div className="relative mt-8 bg-white px-2">
           <h3>
-            <span className="border-b border-sky-600 px-2">ジャンル</span>
+            <span className="border-b border-sky-600 pr-2">ジャンル</span>
           </h3>
           <ul className="border-b border-dashed border-sky-300 pb-2">
             {Genres === undefined ? (
@@ -71,7 +73,7 @@ export default function Posts() {
             )}
           </ul>
           <h3 className="pt-2">
-            <span className="border-b border-sky-600 px-2">タグ</span>
+            <span className="border-b border-sky-600 pr-2">タグ</span>
           </h3>
           <ul>
             {Tags === undefined ? (
@@ -84,7 +86,8 @@ export default function Posts() {
           </ul>
           <div className="absolute bottom-8 right-0 opacity-50">
             <div className="postmark">
-              1<span className="text-sm">通</span>
+              {currentLettersCount}
+              <span className="text-sm">通</span>
             </div>
           </div>
           <div className="text-end">
@@ -101,7 +104,13 @@ export default function Posts() {
   );
 }
 
-function Page({ index, onClick }: { index: number; onClick: (uuid: string) => void }) {
+function Letters({
+  index,
+  onClick,
+}: {
+  index: number;
+  onClick: (uuid: string, lettersCount: number) => void;
+}) {
   const { data } = useSWR(`/posts?page=${index}`, fetcher);
 
   if (!data) {
@@ -131,7 +140,7 @@ function Page({ index, onClick }: { index: number; onClick: (uuid: string) => vo
             <button
               type="button"
               className="stripe-pattern-sky px-2 text-slate-700"
-              onClick={() => onClick(uuid)}
+              onClick={() => onClick(uuid, letters.count)}
             >
               どんな手紙？
             </button>
