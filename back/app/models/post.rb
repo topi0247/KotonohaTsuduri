@@ -48,6 +48,7 @@ class Post < ApplicationRecord
       letters: letters.first ? {
         name: letters.first.name,
         sentences: letters.first.sentences.slice(0, 140),
+        count: letters.count,
       } : {},
     }
   end
