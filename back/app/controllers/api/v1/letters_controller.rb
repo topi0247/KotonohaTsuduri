@@ -13,12 +13,12 @@ class Api::V1::LettersController < Api::V1::BasesController
       # タグの登録
       post.create_tags!(letter_params[:tags])
 
-      letter.post = post
+      post.letters << letter
 
-      if letter.save
+      if post.save
       render json: { success: true, message: "投函しました" }, status: :created
       else
-      render json: { success: false, message: "投函できませんした" }, status: :internal_server_error
+      render json: { success: false,  message: post.errors.full_messages.join(", ")}, status: :internal_server_error
       raise ActiveRecord::Rollback
       end
     end

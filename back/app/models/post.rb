@@ -1,12 +1,17 @@
 class Post < ApplicationRecord
-  has_many :post_letters, dependent: :destroy
-  has_many :letters, through: :post_letters, source: :letter
+  has_many :letters, dependent: :destroy
   has_many :post_genres, dependent: :destroy
   has_many :genres, through: :post_genres, source: :genre
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags, source: :tag
 
   before_validation :set_default_uuid, on: :create
+
+  scope :per_page, ->(pege) {
+    page = page.to_i
+    page = 1 if page < 1 || nil
+    limit(12).offset((page - 1) * 12)
+  }
 
   def set_default_uuid
     new_uuid = SecureRandom.uuid
@@ -35,5 +40,16 @@ class Post < ApplicationRecord
       genre = Genre.find_or_create_by(name: genre_name)
       post_genres.build(genre: genre)
     end
+  end
+
+  def as_custom_index_json
+    {
+      uuid: uuid,
+      letters: letters.first ? {
+        name: letters.first.name,
+        sentences: letters.first.sentences.slice(0, 140),
+        count: letters.count,
+      } : {},
+    }
   end
 end

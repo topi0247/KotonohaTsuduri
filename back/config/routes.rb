@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :posts, only: [:index, :show] do
         member do
           resource :letter, only: [:create]
+          resource :genres, only: [:show]
+          resource :tags, only: [:show]
         end
       end
     end
