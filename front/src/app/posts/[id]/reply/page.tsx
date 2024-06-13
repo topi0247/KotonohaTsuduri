@@ -191,19 +191,23 @@ export default function Reply({ params }: { params: { id: string } }) {
         </div>
       </motion.article>
       <Drawer opened={openedLetter} onClose={closeLetter} position="bottom" size="md">
-        {Letter({ open, page: page, uuid: id })}
+        <div className="m-auto w-full max-w-[800px] border">
+          {Letter({ open, page: page, uuid: id })}
+        </div>
         <div style={{ display: "none" }}>
           {Letter({ open, page: page - 1, uuid: id, setPageCount })}
         </div>
-        <div className="pagination fixed bottom-0 left-0 m-auto flex w-full max-w-[500px] items-center justify-center rounded bg-sky-200 bg-opacity-50 p-4">
-          <Pagination
-            withEdges
-            total={pageCount}
-            siblings={1}
-            defaultValue={1}
-            value={page}
-            onChange={onChange}
-          />
+        <div className="pagination fixed bottom-0 left-0 m-auto flex w-full items-center justify-center">
+          <div className="rounded bg-sky-200 bg-opacity-50 p-4">
+            <Pagination
+              withEdges
+              total={pageCount}
+              siblings={1}
+              defaultValue={1}
+              value={page}
+              onChange={onChange}
+            />
+          </div>
         </div>
       </Drawer>
       <DetailModal opened={opened} onClose={close} uuid={id} lettersCount={pageCount} />
