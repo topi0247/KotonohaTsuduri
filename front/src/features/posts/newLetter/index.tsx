@@ -10,10 +10,8 @@ export default async function NewLetter(value: {
 }) {
   try {
     const res = await axiosClient().post("/posts/none/letter", value);
-    if (res.status !== 200 || !res.data) {
-      return { status: false, data: res.data };
-    }
-    return { status: true, data: res.data };
+
+    return { status: res.status === 201, data: res.data.message };
   } catch (error) {
     return { status: false };
   }

@@ -3,9 +3,11 @@
 export default function Textarea({
   onChange,
   value,
+  placeholder,
 }: {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   value: string;
+  placeholder: string;
 }) {
   const MAX_LENGTH = 100000;
   const letterLength = value.length;
@@ -20,7 +22,7 @@ export default function Textarea({
     <>
       <textarea
         className={`lined-textarea h-full w-full resize-none px-2 text-base focus:outline-none ${isLetterLengthValid ? "" : "text-red-400"}`}
-        placeholder="拝啓..."
+        placeholder={placeholder}
         value={value}
         onChange={(e) => {
           resizeTextArea(e);

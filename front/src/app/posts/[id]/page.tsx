@@ -20,7 +20,6 @@ export default function Post({ params }: { params: { id: string } }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  // const { data } = useSWR(`/posts/${id}?page=${page}`, fetcher);
 
   const onChange = (value: number) => {
     setPage(value);
@@ -31,7 +30,25 @@ export default function Post({ params }: { params: { id: string } }) {
   return (
     <>
       <article className="letter-detail container m-auto flex flex-col items-center justify-center">
-        {Letter({ open, page, uuid: id, setPageCount })}
+        <div className="w-full max-w-[800px] flex-grow">
+          <h1 className="text-center text-xl">とある手紙の物語</h1>
+          <section className="py-2">
+            <button type="button" onClick={open} className="stripe-pattern-sky">
+              どんな手紙？
+            </button>
+          </section>
+          {Letter({ open, page, uuid: id, setPageCount })}
+          <section className="mb-4 mt-2">
+            <div className="m-auto flex w-full items-center justify-between gap-4 px-4">
+              <Link href={Routes.posts} className="rounded bg-slate-500 px-2 py-1 text-white">
+                一覧に戻る
+              </Link>{" "}
+              <Link href={Routes.reply(id)} className="rounded bg-sky-500 px-2 py-1 text-white">
+                返信する
+              </Link>
+            </div>
+          </section>
+        </div>
         <div style={{ display: "none" }}>{Letter({ open, page: page + 1, uuid: id })}</div>
         <div className="pagination bottom-0 left-0 m-auto flex w-full max-w-[500px] items-center justify-center rounded bg-sky-200 bg-opacity-50 p-4">
           <Pagination
@@ -50,7 +67,6 @@ export default function Post({ params }: { params: { id: string } }) {
 }
 
 function Letter({
-  open,
   page,
   uuid,
   setPageCount,
@@ -75,13 +91,7 @@ function Letter({
   if (data.letter == null) return;
 
   return (
-    <div className="w-full max-w-[800px] flex-grow">
-      <h1 className="text-center text-xl">とある手紙の物語</h1>
-      <section className="py-2">
-        <button type="button" onClick={open} className="stripe-pattern-sky">
-          どんな手紙？
-        </button>
-      </section>
+    <>
       {data === undefined ? (
         <p>ちょっとまってね</p>
       ) : (
@@ -93,16 +103,6 @@ function Letter({
           <p className="lined-textarea whitespace-pre-wrap leading-7">{data.letter.sentences}</p>
         </section>
       )}
-      <section className="mb-4 mt-2">
-        <div className="m-auto flex w-full items-center justify-between gap-4 px-4">
-          <Link href={Routes.posts} className="rounded bg-slate-500 px-2 py-1 text-white">
-            一覧に戻る
-          </Link>{" "}
-          <Link href={Routes.reply(uuid)} className="rounded bg-sky-500 px-2 py-1 text-white">
-            返信する
-          </Link>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }
