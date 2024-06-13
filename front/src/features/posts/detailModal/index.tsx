@@ -23,8 +23,8 @@ export default function DetailModal({
   lettersCount: number;
   isReadLetter?: boolean;
 }) {
-  const { data: Tags } = useSWR(`/posts/${uuid}/tags`, fetcher);
-  const { data: Genres } = useSWR(`/posts/${uuid}/genres`, fetcher);
+  const { data: Tags } = useSWR(uuid ? `/posts/${uuid}/tags` : null, fetcher);
+  const { data: Genres } = useSWR(uuid ? `/posts/${uuid}/genres` : null, fetcher);
 
   return (
     <Modal opened={opened} onClose={onClose} title="どんな手紙？">
