@@ -1,4 +1,6 @@
+import "@mantine/core/styles.css";
 import "./globals.css";
+
 import * as Layouts from "@/components/layouts";
 import * as Provider from "@/provider";
 

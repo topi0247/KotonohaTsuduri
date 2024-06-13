@@ -1,18 +1,13 @@
 "use client";
 
-import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 import { Routes } from "@/config";
+import { DetailModal } from "@/features/posts";
 import { axiosClient } from "@/lib";
-
-const fetcher = (url: string) =>
-  axiosClient()
-    .get(url)
-    .then((res) => res.data);
 
 export default function Posts() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -25,9 +20,6 @@ export default function Posts() {
     setCurrentUuid(uuid);
     setCurrentLettersCount(lettersCount);
   };
-
-  const { data: Tags } = useSWR(`/posts/${currentUuid}/tags`, fetcher);
-  const { data: Genres } = useSWR(`/posts/${currentUuid}/genres`, fetcher);
 
   const pages = [];
   for (let i = 1; i <= cnt; i++) {
@@ -58,51 +50,21 @@ export default function Posts() {
           {pages}
         </div>
       </article>
-      <Modal opened={opened} onClose={close} title="どんな手紙？">
-        <div className="relative mt-8 bg-white px-2">
-          <h3>
-            <span className="border-b border-sky-600 pr-2">ジャンル</span>
-          </h3>
-          <ul className="border-b border-dashed border-sky-300 pb-2">
-            {Genres === undefined ? (
-              <li>ちょっとまってね</li>
-            ) : Genres?.length === 0 ? (
-              <li>ないみたい</li>
-            ) : (
-              Genres?.map((genre: string) => <li key={genre}>{genre}</li>)
-            )}
-          </ul>
-          <h3 className="pt-2">
-            <span className="border-b border-sky-600 pr-2">タグ</span>
-          </h3>
-          <ul>
-            {Tags === undefined ? (
-              <li>ちょっとまってね</li>
-            ) : Tags?.length === 0 ? (
-              <li>ないみたい</li>
-            ) : (
-              Tags.map((tag: string) => <li key={tag}>{tag}</li>)
-            )}
-          </ul>
-          <div className="absolute bottom-8 right-0 opacity-50">
-            <div className="postmark">
-              {currentLettersCount}
-              <span className="text-sm">通</span>
-            </div>
-          </div>
-          <div className="text-end">
-            <Link
-              href={Routes.post(currentUuid)}
-              className="stripe-pattern-orange px-2 text-slate-700"
-            >
-              手紙を読む
-            </Link>
-          </div>
-        </div>
-      </Modal>
+      <DetailModal
+        opened={opened}
+        onClose={close}
+        uuid={currentUuid}
+        lettersCount={currentLettersCount}
+        isReadLetter={true}
+      />
     </>
   );
 }
+
+const fetcher = (url: string) =>
+  axiosClient()
+    .get(url)
+    .then((res) => res.data);
 
 function Letters({
   index,

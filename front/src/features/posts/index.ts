@@ -1,3 +1,4 @@
+import DetailModal from "./detailModal";
 import NewLetter from "./newLetter";
 
-export { NewLetter };
+export { NewLetter, DetailModal };
