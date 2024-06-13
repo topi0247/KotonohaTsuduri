@@ -1,8 +1,8 @@
-class Api::V1::TagsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+class Api::V1::TagsController < Api::V1::BasesController
+  skip_before_action :authenticate_api_v1_user!, only: %i[show]
 
-  def index
-    tags = Post.includes(:tags).find_by(uuid: params[:post_uuid]).tags.map(&:name)
+  def show
+    tags = Post.includes(:tags).find_by(uuid: params[:id]).tags.map(&:name)
     render json: tags, status: :ok
   end
 end

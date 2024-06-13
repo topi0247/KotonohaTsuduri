@@ -38,13 +38,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_090303) do
     t.index ["post_id"], name: "index_post_genres_on_post_id"
   end
 
-  create_table "post_letters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "letter_id", null: false
-    t.index ["letter_id"], name: "index_post_letters_on_letter_id"
-    t.index ["post_id"], name: "index_post_letters_on_post_id"
-  end
-
   create_table "post_tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.bigint "tag_id", null: false

@@ -1,8 +1,8 @@
-class Api::V1::GenresController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+class Api::V1::GenresController < Api::V1::BasesController
+  skip_before_action :authenticate_api_v1_user!, only: %i[show]
   
-  def index
-    genres = Post.includes(:genres).find_by(uuid: params[:post_uuid]).genres.map(&:name)
+  def show
+    genres = Post.includes(:genres).find_by(uuid: params[:id]).genres.map(&:name)
 
     render json: genres, status: :ok
   end
