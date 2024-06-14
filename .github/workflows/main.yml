@@ -16,7 +16,7 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_BACKEND_APP_NAME }}
           email: ${{ secrets.HEROKU_EMAIL }}
-          dockerfile_directory: "backend"
+          dockerfile_directory: "back"
           dockerfile_name: Dockerfile
           docker_options: "--no-cache"
           process_type: web
