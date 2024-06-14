@@ -55,7 +55,7 @@ export default function PostNew() {
         message: "手紙を投函しました",
         type: NotificationType.SUCCESS,
       });
-      router.push(Routes.home);
+      router.push(Routes.posts);
     }
   }, [isPostComplete, isPostAnimationComplete]);
 

@@ -13,7 +13,7 @@ export default function GoogleLogin() {
 
   useEffect(() => {
     if (!isLogged) return;
-    
+
     router.push(Config.Routes.posts);
   }, [isLogged]);
 
