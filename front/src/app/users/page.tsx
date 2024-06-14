@@ -41,8 +41,9 @@ export default function Users() {
   return (
     <article className="container relative m-auto">
       <h1 className="text-center text-xl">みんなの世界</h1>
+      <p className="text-center text-sm">手紙を投稿した人だけだよ</p>
       <section className="my-4">
-        <div className="md:gapx-4 mx-4 grid grid-cols-1 md:m-auto md:grid-cols-4 md:gap-y-8">
+        <div className="mx-4 grid grid-cols-1 md:m-auto md:grid-cols-4 md:gap-x-4 md:gap-y-8">
           {pages}
         </div>
       </section>
