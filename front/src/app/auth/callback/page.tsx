@@ -31,7 +31,10 @@ function AuthCallbackPageContent() {
 
     if (accessToken && uid && expiry && client) {
       parentWindow.postMessage({ accessToken, uid, expiry, client }, `${getEnv("URL")}/login`);
-      window.close();
+      const timeoutId = setTimeout(() => {
+        window.close();
+        clearTimeout(timeoutId);
+      }, 100);
     }
   }, []);
   return <></>;

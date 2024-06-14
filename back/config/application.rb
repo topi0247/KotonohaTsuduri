@@ -49,5 +49,12 @@ module App
     # Cookieで同じサイトを扱うための設定
     config.action_dispatch.cookies_same_site_protection = :none
     config.action_controller.forgery_protection_origin_check = false
+
+    # COOPとCOEPのエラー対策
+    # TODO : 要確認
+    config.action_dispatch.default_headers.merge!(
+      'Cross-Origin-Opener-Policy' => 'same-origin-allow-popups',
+      'Cross-Origin-Embedder-Policy' => 'unsafe-none'
+    )
   end
 end
