@@ -10,7 +10,6 @@ function AuthCallbackPageContent() {
 
   useEffect(() => {
     const sendMessageAndClose = async () => {
-      await fetch("/api/setHeaders");
       const parentWindow: Window | null = window.opener as (Window & typeof globalThis) | null;
 
       if (!parentWindow) {
