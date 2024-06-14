@@ -39,6 +39,10 @@ const menuItems = {
     href: Routes.posts,
     word: "みんなの手紙",
   },
+  users: {
+    href: Routes.users,
+    word: "みんなの世界",
+  },
   user: (uuid: string) => ({
     href: Routes.user(uuid),
     word: "綴った手紙",
@@ -99,6 +103,13 @@ export const NavigationMenu = ({
         <NavigationMenuItem
           href={menuItems.posts.href}
           word={menuItems.posts.word}
+          handleToggle={handleToggle}
+        />
+
+        {/* ユーザー一覧 */}
+        <NavigationMenuItem
+          href={menuItems.users.href}
+          word={menuItems.users.word}
           handleToggle={handleToggle}
         />
 

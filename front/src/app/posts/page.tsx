@@ -2,7 +2,7 @@
 
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import useSWR from "swr";
 
@@ -16,8 +16,14 @@ export default function Posts() {
   const [cnt, setCnt] = useState(1);
   const [currentUuid, setCurrentUuid] = useState<string>("");
   const [currentLettersCount, setCurrentLettersCount] = useState<number>(0);
+  const allPostsCountRef = useRef(1);
   const { autoLogin } = useAuth();
   const [user, setUser] = useRecoilState(userState);
+  const PER_PAGE = 12;
+
+  const setPostsCount = (allPostsCount: number) => {
+    allPostsCountRef.current = allPostsCount;
+  };
 
   const handleClick = (uuid: string, lettersCount: number) => {
     open();
@@ -27,7 +33,7 @@ export default function Posts() {
 
   const pages = [];
   for (let i = 1; i <= cnt; i++) {
-    pages.push(<Letters key={i} index={i} onClick={handleClick} />);
+    pages.push(<Letters key={i} index={i} onClick={handleClick} setPostsCount={setPostsCount} />);
   }
 
   useEffect(() => {
@@ -43,7 +49,8 @@ export default function Posts() {
     const handleScroll = () => {
       const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
       const isScrolledToBottom = scrollHeight - scrollTop === clientHeight;
-      if (isScrolledToBottom) {
+      const allPage = Math.ceil(allPostsCountRef.current / PER_PAGE);
+      if (isScrolledToBottom && cnt + 1 <= allPage) {
         setCnt((prev) => prev + 1);
       }
     };
@@ -82,15 +89,19 @@ const fetcher = (url: string) =>
 function Letters({
   index,
   onClick,
+  setPostsCount,
 }: {
   index: number;
   onClick: (uuid: string, lettersCount: number) => void;
+  setPostsCount: (allPostsCount: number) => void;
 }) {
   const { data } = useSWR(`/posts?page=${index}`, fetcher);
 
   if (!data) {
-    return <div>ちょっとまってね</div>;
+    return;
   }
+
+  setPostsCount(data.all_count);
 
   return data.posts.map(
     ({
