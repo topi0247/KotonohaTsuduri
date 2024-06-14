@@ -7,7 +7,16 @@ class Api::V1::UsersController < Api::V1::BasesController
 
   def show
     posts = User.includes(letters: :user).find_by(uuid: params[:id]).posts
-    render json: { posts: posts.map(&:as_custom_index_json), all_count: posts.count }, status: :ok
+    first_posts = []
+    reply_posts = []
+    posts.map do |post|
+      if post.letters.first.user.uuid == params[:id]
+        first_posts << post
+      else
+        reply_posts << post
+      end
+    end
+    render json: { first_posts: first_posts.map(&:as_custom_index_json),reply_posts: reply_posts.map(&:as_custom_index_json), all_count: posts.count }, status: :ok
   end
 
   def update
