@@ -15,7 +15,7 @@ export default function GoogleLogin() {
   const SECONDS = 1000;
 
   useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
+    const handleMessage =(event: MessageEvent) => {
       // セキュリティのためオリジンを確認
       if (event.origin !== Config.getEnv("URL")) return;
 

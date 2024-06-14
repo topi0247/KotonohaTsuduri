@@ -9,33 +9,38 @@ function AuthCallbackPageContent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const parentWindow: Window | null = window.opener as (Window & typeof globalThis) | null;
+    const sendMessageAndClose = async () => {
+      await fetch("/api/setHeaders");
+      const parentWindow: Window | null = window.opener as (Window & typeof globalThis) | null;
 
-    if (!parentWindow) {
-      window.close();
-      return;
-    }
-
-    const status = searchParams.get("status");
-
-    if (status === "failure") {
-      parentWindow.postMessage({ status: "error" }, `${getEnv("URL")}/login`);
-      window.close();
-      return;
-    }
-
-    const accessToken = searchParams.get("token");
-    const uid = searchParams.get("uid");
-    const expiry = searchParams.get("expiry");
-    const client = searchParams.get("client");
-
-    if (accessToken && uid && expiry && client) {
-      parentWindow.postMessage({ accessToken, uid, expiry, client }, `${getEnv("URL")}/login`);
-      const timeoutId = setTimeout(() => {
+      if (!parentWindow) {
         window.close();
-        clearTimeout(timeoutId);
-      }, 100);
-    }
+        return;
+      }
+
+      const status = searchParams.get("status");
+
+      if (status === "failure") {
+        parentWindow.postMessage({ status: "error" }, `${getEnv("URL")}/login`);
+        window.close();
+        return;
+      }
+
+      const accessToken = searchParams.get("token");
+      const uid = searchParams.get("uid");
+      const expiry = searchParams.get("expiry");
+      const client = searchParams.get("client");
+
+      if (accessToken && uid && expiry && client) {
+        parentWindow.postMessage({ accessToken, uid, expiry, client }, `${getEnv("URL")}/login`);
+        const timeoutId = setTimeout(() => {
+          window.close();
+          clearTimeout(timeoutId);
+        }, 100);
+      }
+    };
+
+    sendMessageAndClose();
   }, []);
   return <></>;
 }
