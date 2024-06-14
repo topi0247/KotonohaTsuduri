@@ -10,9 +10,34 @@ import * as Provider from "@/provider";
 
 import type { Metadata } from "next";
 
+const URL = getEnv("URL");
+
 export const metadata: Metadata = {
-  title: "言の葉つづり",
+  title: {
+    template: "%s | 言の葉つづり",
+    default: "言の葉つづり",
+  },
   description: "手紙の向こうは知らない世界",
+  alternates: {
+    canonical: URL,
+  },
+  openGraph: {
+    title: "言の葉つづり",
+    description: "手紙の向こうは知らない世界",
+    url: URL,
+    siteName: "言の葉つづり",
+    images: `${URL}/assets/OGP.png`,
+    type: "website",
+  },
+  icons: {
+    icon: `${URL}/assets/favicon.ico`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "言の葉つづり",
+    description: "手紙の向こうは知らない世界",
+    images: `${URL}/assets/OGP.png`,
+  },
 };
 
 export default function RootLayout({
