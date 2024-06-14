@@ -2,6 +2,7 @@ import "@mantine/core/styles.css";
 import "./globals.css";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
 
 import * as Layouts from "@/components/layouts";
 import { getEnv } from "@/config";
@@ -35,7 +36,12 @@ export default function RootLayout({
           <Layouts.MainLayout>{children}</Layouts.MainLayout>
         </Provider.Provider>
       </body>
-      <GoogleAnalytics gaId={getEnv("GOOGLE_ANALYTICS_ID")} />
+      {getEnv("GOOGLE_ANALYTICS_ID") && (
+        <>
+          <GoogleAnalytics gaId={getEnv("GOOGLE_ANALYTICS_ID")} />
+          <Analytics />
+        </>
+      )}
     </html>
   );
 }
