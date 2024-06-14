@@ -15,7 +15,7 @@ export const useAuth = () => {
     try {
       const res = await axiosClient().get("/auth/validate_token");
       if (res.status !== 200 || !res.data.success) return;
-      setUser(res.data.user);
+      setUser({ ...res.data.user, isLogged: true });
     } catch (error) {
       console.error(error);
     }
@@ -29,5 +29,6 @@ export const userState = atom<IUser>({
   default: {
     uuid: "",
     name: "",
+    isLogged: false,
   },
 });

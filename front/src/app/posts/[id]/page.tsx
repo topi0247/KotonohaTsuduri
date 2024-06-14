@@ -4,10 +4,12 @@ import { Pagination } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import useSWR from "swr";
 
 import { Routes, getEnv } from "@/config";
 import { DetailModal } from "@/features/posts";
+import { userState } from "@/hooks";
 import { axiosClient } from "@/lib";
 
 const fetcher = (url: string) =>
@@ -20,6 +22,7 @@ export default function Post({ params }: { params: { id: string } }) {
   const [opened, { open, close }] = useDisclosure(false);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const user = useRecoilValue(userState);
 
   const onChange = (value: number) => {
     setPage(value);
@@ -60,9 +63,11 @@ export default function Post({ params }: { params: { id: string } }) {
                 >
                   Xシェア
                 </button>
-                <Link href={Routes.reply(id)} className="rounded bg-sky-500 px-2 py-1 text-white">
-                  返信する
-                </Link>
+                {user.uuid && (
+                  <Link href={Routes.reply(id)} className="rounded bg-sky-500 px-2 py-1 text-white">
+                    返信する
+                  </Link>
+                )}
               </div>
             </div>
           </section>

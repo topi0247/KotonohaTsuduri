@@ -3,43 +3,25 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
-import { getEnv } from "@/config";
+import { setToken } from "@/lib";
 
 function AuthCallbackPageContent() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const sendMessageAndClose = async () => {
-      const parentWindow: Window | null = window.opener as (Window & typeof globalThis) | null;
-
-      if (!parentWindow) {
-        window.close();
-        return;
-      }
-
-      const status = searchParams.get("status");
-
-      if (status === "failure") {
-        parentWindow.postMessage({ status: "error" }, `${getEnv("URL")}/login`);
-        window.close();
-        return;
-      }
-
+    const setTokenAndClose = async () => {
       const accessToken = searchParams.get("token");
       const uid = searchParams.get("uid");
       const expiry = searchParams.get("expiry");
       const client = searchParams.get("client");
 
       if (accessToken && uid && expiry && client) {
-        parentWindow.postMessage({ accessToken, uid, expiry, client }, `${getEnv("URL")}/login`);
-        const timeoutId = setTimeout(() => {
-          window.close();
-          clearTimeout(timeoutId);
-        }, 100);
+        setToken({ accessToken, uid, expiry, client });
+        window.close();
       }
     };
 
-    sendMessageAndClose();
+    setTokenAndClose();
   }, []);
   return <></>;
 }

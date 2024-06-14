@@ -1,6 +1,7 @@
 export interface IUser {
   uuid: string;
   name: string;
+  isLogged: boolean;
 }
 
 export enum NotificationType {

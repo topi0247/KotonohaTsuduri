@@ -3,10 +3,12 @@
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import useSWR from "swr";
 
 import { Routes } from "@/config";
 import { DetailModal } from "@/features/posts";
+import { useAuth, userState } from "@/hooks";
 import { axiosClient } from "@/lib";
 
 export default function Posts() {
@@ -14,6 +16,8 @@ export default function Posts() {
   const [cnt, setCnt] = useState(1);
   const [currentUuid, setCurrentUuid] = useState<string>("");
   const [currentLettersCount, setCurrentLettersCount] = useState<number>(0);
+  const { autoLogin } = useAuth();
+  const [user, setUser] = useRecoilState(userState);
 
   const handleClick = (uuid: string, lettersCount: number) => {
     open();
@@ -27,6 +31,15 @@ export default function Posts() {
   }
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      await autoLogin();
+      setUser((prev) => ({ ...prev, isLogged: true }));
+    };
+
+    if (!user.isLogged) {
+      fetchUserData();
+    }
+
     const handleScroll = () => {
       const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
       const isScrolledToBottom = scrollHeight - scrollTop === clientHeight;
