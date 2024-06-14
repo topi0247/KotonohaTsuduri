@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-import { Routes } from "@/config";
+import { Routes, getEnv } from "@/config";
 import { DetailModal } from "@/features/posts";
 import { axiosClient } from "@/lib";
 
@@ -27,6 +27,14 @@ export default function Post({ params }: { params: { id: string } }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleXShare = () => {
+    const url = `https://twitter.com/intent/tweet?text=お手紙みっけ%0a&hashtags=言の葉つづり_topi&url=${getEnv("URL")}/posts/${id}`;
+    const left = (window.screen.width - 500) / 2;
+    const top = (window.screen.height - 500) / 2;
+    const params = `width=700,height=500,left=${left},top=${top}`;
+    window.open(url, "言の葉つづり Xシェア", params);
+  };
+
   return (
     <>
       <article className="letter-detail container m-auto flex flex-col items-center justify-center">
@@ -42,10 +50,20 @@ export default function Post({ params }: { params: { id: string } }) {
             <div className="m-auto flex w-full items-center justify-between gap-4 px-4">
               <Link href={Routes.posts} className="rounded bg-slate-500 px-2 py-1 text-white">
                 一覧に戻る
-              </Link>{" "}
-              <Link href={Routes.reply(id)} className="rounded bg-sky-500 px-2 py-1 text-white">
-                返信する
               </Link>
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  className="rounded bg-slate-900 px-2 py-1 text-white"
+                  rel="noopener noreferrer"
+                  onClick={handleXShare}
+                  type="button"
+                >
+                  Xシェア
+                </button>
+                <Link href={Routes.reply(id)} className="rounded bg-sky-500 px-2 py-1 text-white">
+                  返信する
+                </Link>
+              </div>
             </div>
           </section>
         </div>
