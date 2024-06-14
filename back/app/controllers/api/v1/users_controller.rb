@@ -2,7 +2,8 @@ class Api::V1::UsersController < Api::V1::BasesController
   skip_before_action :authenticate_api_v1_user!, only: %i[index show]
   def index
     users = User.all
-    render json: users.map(&:as_custom_index_json), status: :ok
+    page = params[:page].present? ? params[:page].to_i : 1
+    render json: {users: users.per_page(page).map(&:as_custom_index_json), all_count: users.count }, status: :ok
   end
 
   def show

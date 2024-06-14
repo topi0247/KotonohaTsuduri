@@ -10,6 +10,13 @@ class User < ActiveRecord::Base
 
   before_validation :set_default_uuid, on: :create
 
+  scope :per_page, ->(page) {
+    page = page.to_i
+    page = 1 if page < 1
+    limit(48).offset((page - 1) * 48)
+  }
+
+
   def self.find_or_create_by_oauth(auth)
     transaction do
       user = find_by(uid: auth.uid)

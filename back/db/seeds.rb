@@ -19,3 +19,7 @@
 #   end
 #   post.save
 # end
+
+# 60.times do |n|
+#   User.find_or_create_by(name: "user#{n}", uid:"uid#{n}", uuid: "uuid#{n}")
+# end
