@@ -1,7 +1,10 @@
 import "@mantine/core/styles.css";
 import "./globals.css";
 
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 import * as Layouts from "@/components/layouts";
+import { getEnv } from "@/config";
 import * as Provider from "@/provider";
 
 import type { Metadata } from "next";
@@ -23,12 +26,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         {/* 句読点だけKlee One */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Klee+One&text=、。&display=swap"
-          rel="stylesheet"
-        />
-        {/* 基本の文字はLXGW WenKai TC */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -37,6 +35,7 @@ export default function RootLayout({
           <Layouts.MainLayout>{children}</Layouts.MainLayout>
         </Provider.Provider>
       </body>
+      <GoogleAnalytics gaId={getEnv("GOOGLE_ANALYTICS_ID")} />
     </html>
   );
 }
