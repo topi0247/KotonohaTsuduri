@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :letters, dependent: :destroy
+  has_many :posts, through: :letters
 
   before_validation :set_default_uuid, on: :create
 
@@ -30,5 +31,12 @@ class User < ActiveRecord::Base
     new_uuid = SecureRandom.uuid
     encode_uuid = Base64.urlsafe_encode64([new_uuid.delete('-')].pack("H*")).tr('=', '')
     self.uuid = encode_uuid
+  end
+
+  def as_custom_index_json
+    {
+      uuid: uuid,
+      name: name
+    }
   end
 end
