@@ -12,6 +12,7 @@ Rails.application.routes.draw do
           resource :tags, only: [:show]
         end
       end
+      resources :users, only: [:index, :show, :update]
     end
   end
   root 'application#index'
