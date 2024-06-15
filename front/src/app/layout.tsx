@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import "./globals.css";
+import "@/app/globals.css";
 
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";

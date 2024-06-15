@@ -9,10 +9,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "import",
-    "@typescript-eslint"
-  ],
+  "plugins": ["import", "@typescript-eslint"],
   "root": true,
   "rules": {
     "react/no-unescaped-entities": "off",
@@ -24,18 +21,13 @@
           "builtin",
           "external",
           "internal",
-          [
-            "parent",
-            "sibling"
-          ],
+          ["parent", "sibling"],
           "object",
           "type",
           "index"
         ],
         "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": [
-          "builtin"
-        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
         "pathGroups": [
           {
             "pattern": "@/src/utils/**",

@@ -210,6 +210,21 @@ body {
     0 calc(1.75rem - 1px);
 }
 
+.tape-container {
+  position: absolute;
+  top: 230px;
+  left: -140px;
+  z-index: 10;
+  display: flex;
+  width: 280px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .stripe-pattern-sky,
 .mantine-Modal-header {
   position: relative;
@@ -370,6 +385,20 @@ body {
   margin: 0 auto;
 }
 
+.postmark-container {
+  position: absolute;
+  right: -120px;
+  top: 200px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .postmark {
   position: relative;
   margin: 0;
@@ -388,6 +417,26 @@ body {
   -ms-transform: rotate(16deg);
   transform: rotate(16deg);
   white-space: nowrap;
+}
+
+.name-container {
+  position: absolute;
+  right: -140px;
+  top: 275px;
+  width: 180px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: end;
+}
+
+.name {
+  width: 100%;
 }
 
 .letter-detail {

@@ -19,7 +19,7 @@ export const Letter = memo(function Letter({
             {letter.letters.sentences}
           </div>
         </div>
-        <div className="absolute -left-[140px] top-[230px] z-10 flex w-[280px] flex-col items-start justify-center gap-3 text-sm">
+        <div className="tape-container">
           <button
             type="button"
             className="stripe-pattern-sky px-2 text-slate-700"
@@ -34,13 +34,13 @@ export const Letter = memo(function Letter({
             手紙を読む
           </Link>
         </div>
-        <div className="absolute -right-[120px] top-[200px] z-10 flex flex-col items-start justify-center gap-3 text-sm">
+        <div className="postmark-container">
           <div className="postmark">
             {letter.letters.count}
             <span className="text-sm">通</span>
           </div>
         </div>
-        <div className="absolute -right-[140px] top-[275px] z-10 flex w-[180px] flex-col items-start justify-center gap-3 text-end text-sm">
+        <div className="name-container">
           <p className="w-full">{letter.letters.name} より</p>
         </div>
       </div>
