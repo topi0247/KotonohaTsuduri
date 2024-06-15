@@ -85,7 +85,7 @@ export default function User({ params: { id } }: { params: { id: string } }) {
     pages.push(
       <Letters
         key={i}
-        url={`/users/${id}?tag=${tabType}&page=${i}`}
+        url={`/users/${id}?tab=${tabType}&page=${i}`}
         onClick={handleClick}
         setPostsCount={setPostsCount}
       />,
