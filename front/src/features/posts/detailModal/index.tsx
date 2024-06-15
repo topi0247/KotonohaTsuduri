@@ -1,5 +1,6 @@
 import { Modal } from "@mantine/core";
 import Link from "next/link";
+import { memo } from "react";
 import useSWR from "swr";
 
 import { Routes } from "@/config";
@@ -10,7 +11,7 @@ const fetcher = (url: string) =>
     .get(url)
     .then((res) => res.data);
 
-export default function DetailModal({
+export const DetailModal = memo(function DetailModal({
   opened,
   onClose,
   uuid,
@@ -72,4 +73,4 @@ export default function DetailModal({
       </div>
     </Modal>
   );
-}
+});

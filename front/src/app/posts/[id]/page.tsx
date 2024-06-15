@@ -3,19 +3,12 @@
 import { Pagination } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import useSWR from "swr";
 
 import { Routes, getEnv } from "@/config";
-import { DetailModal } from "@/features/posts";
+import { DetailModal, LetterDetail } from "@/features/posts";
 import { userState } from "@/hooks";
-import { axiosClient } from "@/lib";
-
-const fetcher = (url: string) =>
-  axiosClient()
-    .get(url)
-    .then((res) => res.data);
 
 export default function Post({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -48,7 +41,14 @@ export default function Post({ params }: { params: { id: string } }) {
               どんな手紙？
             </button>
           </section>
-          {Letter({ open, page, uuid: id, setPageCount })}
+          <LetterDetail page={page} uuid={id} setPageCount={setPageCount} />
+          <div style={{ display: "none" }}>
+            <LetterDetail
+              page={page + 1 <= pageCount ? page + 1 : page}
+              uuid={id}
+              setPageCount={setPageCount}
+            />
+          </div>
           <section className="mb-4 mt-2">
             <div className="m-auto flex w-full items-center justify-between gap-4 px-4">
               <Link href={Routes.posts} className="rounded bg-slate-500 px-2 py-1 text-white">
@@ -72,7 +72,6 @@ export default function Post({ params }: { params: { id: string } }) {
             </div>
           </section>
         </div>
-        <div style={{ display: "none" }}>{Letter({ open, page: page + 1, uuid: id })}</div>
         <div className="pagination bottom-0 left-0 m-auto flex w-full max-w-[500px] items-center justify-center rounded bg-sky-200 bg-opacity-50 p-4">
           <Pagination
             withEdges
@@ -85,47 +84,6 @@ export default function Post({ params }: { params: { id: string } }) {
         </div>
       </article>
       <DetailModal opened={opened} onClose={close} uuid={id} lettersCount={pageCount} />
-    </>
-  );
-}
-
-function Letter({
-  page,
-  uuid,
-  setPageCount,
-}: {
-  open: () => void;
-  page: number;
-  uuid: string;
-  setPageCount?: (value: number) => void;
-}) {
-  const { data } = useSWR(`/posts/${uuid}?page=${page}`, fetcher);
-
-  useEffect(() => {
-    if (data && setPageCount) {
-      setPageCount(data.all_count);
-    }
-  }, [data, setPageCount]);
-
-  if (data === undefined) {
-    return <p>ちょっとまってね</p>;
-  }
-
-  if (data.letter == null) return;
-
-  return (
-    <>
-      {data === undefined ? (
-        <p>ちょっとまってね</p>
-      ) : (
-        <section className="m-auto my-2 bg-white p-4 px-8">
-          <p className="border-b border-sky-200 text-end">{data.letter.name} より</p>
-          <p className="border-b border-sky-200 pt-1 text-end text-sm text-gray-400">
-            {data.letter.created_at}
-          </p>
-          <p className="lined-textarea whitespace-pre-wrap leading-7">{data.letter.sentences}</p>
-        </section>
-      )}
     </>
   );
 }

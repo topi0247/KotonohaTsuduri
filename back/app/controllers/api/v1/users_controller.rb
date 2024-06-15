@@ -7,17 +7,22 @@ class Api::V1::UsersController < Api::V1::BasesController
   end
 
   def show
-    posts = User.includes(letters: :user).find_by(uuid: params[:id]).posts
-    first_posts = []
-    reply_posts = []
-    posts.map do |post|
-      if post.letters.first.user.uuid == params[:id]
-        first_posts << post
-      else
-        reply_posts << post
+    posts = User.includes(letters: :posts).find_by(uuid: params[:id]).posts
+
+    tab_posts = []
+    case params[:tab]
+    when 'first'
+      posts.map do |post|
+        tab_posts << post if post.letters.first.user.uuid == params[:id]
       end
+    when 'reply'
+      posts.map do |post|
+        tab_posts << post if post.letters.first.user.uuid != params[:id]
+      end
+    else
+      tab_posts = posts
     end
-    render json: { first_posts: first_posts.map(&:as_custom_index_json),reply_posts: reply_posts.map(&:as_custom_index_json), all_count: posts.count }, status: :ok
+    render json: { tab_posts: tab_posts.map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
   end
 
   def update

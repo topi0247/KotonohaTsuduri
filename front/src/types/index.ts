@@ -17,3 +17,12 @@ export interface INotification {
   type: NotificationType;
   open: boolean;
 }
+
+export interface ILetter {
+  uuid: string;
+  letters: {
+    name: string;
+    sentences: string;
+    count: number;
+  };
+}

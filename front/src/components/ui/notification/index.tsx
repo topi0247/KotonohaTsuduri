@@ -20,7 +20,7 @@ export default function Notification() {
         clearTimeout(timeoutId);
       }, 3000);
     }
-  }, [notification]);
+  }, [notification, closeNotification]);
 
   const getColor = () => {
     switch (notification.type) {

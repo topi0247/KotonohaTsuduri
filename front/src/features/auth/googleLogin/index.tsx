@@ -15,7 +15,7 @@ export default function GoogleLogin() {
     if (!isLogged) return;
 
     router.push(Config.Routes.posts);
-  }, [isLogged]);
+  }, [isLogged, router]);
 
   const handlePopup = () => {
     const top = window.screenY + (window.outerHeight - 600) / 2;

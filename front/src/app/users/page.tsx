@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 
 import { Routes } from "@/config";
@@ -21,22 +21,22 @@ export default function Users() {
     pages.push(<UserLink key={i} index={i} setUsersCount={setUsersCount} />);
   }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
-      const isScrolledToBottom = scrollHeight - scrollTop === clientHeight;
-      const allPage = Math.ceil(allUsersCountRef.current / PER_PAGE);
-      if (isScrolledToBottom && cnt + 1 <= allPage) {
-        setCnt((prev) => prev + 1);
-      }
-    };
+  const handleScroll = useCallback(() => {
+    const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
+    const isScrolledToBottom = scrollHeight - scrollTop === clientHeight;
+    const allPage = Math.ceil(allUsersCountRef.current / PER_PAGE);
+    if (isScrolledToBottom && cnt + 1 <= allPage) {
+      setCnt((prev) => prev + 1);
+    }
+  }, [setCnt, cnt, allUsersCountRef]);
 
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return (
     <article className="container relative m-auto">
