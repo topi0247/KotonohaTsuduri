@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { mutate } from "swr";
 
 import * as UI from "@/components/ui";
 import { Routes } from "@/config";
@@ -37,16 +38,16 @@ export default function Reply({ params }: { params: { id: string } }) {
         message: "手紙を返信しました",
         type: NotificationType.SUCCESS,
       });
+      mutate(`/posts/${id}/letter`);
       router.push(Routes.post(id));
     }
-  }, [isPost, isPostAnimationComplete, router, id, setNewNotification]);
+  }, [isPost, isPostAnimationComplete]);
 
   const togglePost = () => {
     setIsPost(!isPost);
   };
 
   const onAnimationComplete = () => {
-    if (!isPost) return;
     setIsPostAnimationComplete(true);
   };
 

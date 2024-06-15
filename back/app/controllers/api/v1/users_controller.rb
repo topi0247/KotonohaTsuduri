@@ -7,25 +7,35 @@ class Api::V1::UsersController < Api::V1::BasesController
   end
 
   def show
-    posts = User.includes(letters: :post).find_by(uuid: params[:id]).posts
+    user = User.includes(letters: :post).find_by(uuid: params[:id])
+    posts = user.posts
 
     tab_posts = []
     case params[:tab]
     when 'first'
-      posts.map do |post|
-        tab_posts << post if post.letters.first.user.uuid == params[:id]
+      posts.each do |post|
+        if post.letters.first.user == user
+          tab_posts << post
+        end
       end
     when 'reply'
-      posts.map do |post|
-        tab_posts << post if post.letters.first.user.uuid != params[:id]
+      posts.each do |post|
+        if post.letters.first.user != user
+          tab_posts << post
+        end
       end
     else
       tab_posts = posts
     end
 
     page = params[:page].present? ? params[:page].to_i : 1
+    per_page = 12
 
-    render json: { posts: tab_posts.per_page(page).map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
+    # ページネーションの実装
+    offset = (page - 1) * per_page
+    paginated_posts = tab_posts.slice(offset, per_page) || []
+
+    render json: { posts: paginated_posts.map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
   end
 
   def show_user
