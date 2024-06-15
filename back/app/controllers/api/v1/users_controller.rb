@@ -33,7 +33,7 @@ class Api::V1::UsersController < Api::V1::BasesController
   def update
     user = current_api_v1_user
     if user.update(user_params)
-      head :success
+      head :ok
     else
       head :bad_request
     end
