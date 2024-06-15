@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::BasesController
-  skip_before_action :authenticate_api_v1_user!, only: %i[index show]
+  skip_before_action :authenticate_api_v1_user!, only: %i[index show show_user]
   def index
     users = User.includes(:letters).where.not(letters: { id: nil }).order(updated_at: :desc)
     page = params[:page].present? ? params[:page].to_i : 1
