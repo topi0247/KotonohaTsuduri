@@ -12,7 +12,9 @@ Rails.application.routes.draw do
           resource :tags, only: [:show]
         end
       end
-      resources :users, only: [:index, :show, :update]
+      resources :users, only: [:index, :show, :update] do
+        get 'show_user', on: :member
+      end
     end
   end
   root 'application#index'

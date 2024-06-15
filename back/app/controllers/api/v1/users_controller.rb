@@ -7,7 +7,7 @@ class Api::V1::UsersController < Api::V1::BasesController
   end
 
   def show
-    posts = User.includes(letters: :posts).find_by(uuid: params[:id]).posts
+    posts = User.includes(letters: :post).find_by(uuid: params[:id]).posts
 
     tab_posts = []
     case params[:tab]
@@ -22,7 +22,12 @@ class Api::V1::UsersController < Api::V1::BasesController
     else
       tab_posts = posts
     end
-    render json: { tab_posts: tab_posts.map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
+    render json: { posts: tab_posts.map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
+  end
+
+  def show_user
+    user = User.find_by(uuid: params[:id])
+    render json: user.name, status: :ok
   end
 
   def update

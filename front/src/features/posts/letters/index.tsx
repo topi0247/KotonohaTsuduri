@@ -12,15 +12,15 @@ const fetcher = (url: string) =>
     .then((res) => res.data);
 
 export const Letters = memo(function Letters({
-  index,
+  url,
   onClick,
   setPostsCount,
 }: {
-  index: number;
+  url: string;
   onClick: (uuid: string, lettersCount: number) => void;
   setPostsCount: (allPostsCount: number) => void;
 }) {
-  const { data } = useSWR(`/posts?page=${index}`, fetcher);
+  const { data } = useSWR(url, fetcher);
 
   if (!data) {
     return;
