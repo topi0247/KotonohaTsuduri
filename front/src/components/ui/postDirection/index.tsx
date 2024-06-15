@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const variants = {
   initial: {
@@ -46,21 +46,21 @@ export default function PostDirection({
 }) {
   const controls = useAnimation();
 
-  useEffect(() => {
-    const sequence = async () => {
-      await controls.start("fullScreenWhite");
-      await controls.start("shrinkRotate");
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      await controls.start("showText");
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      await controls.start("moveUp");
-      onAnimationComplete();
-    };
+  const sequence = useCallback(async () => {
+    await controls.start("fullScreenWhite");
+    await controls.start("shrinkRotate");
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await controls.start("showText");
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await controls.start("moveUp");
+    onAnimationComplete();
+  }, []);
 
+  useEffect(() => {
     if (isPost) {
       sequence();
     }
-  }, [isPost]);
+  }, [isPost, sequence]);
 
   return (
     <div className={`fixed left-0 top-0 h-full w-full ${isPost ? "" : "hidden"}`}>

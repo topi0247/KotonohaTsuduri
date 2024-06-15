@@ -22,7 +22,7 @@ function AuthCallbackPageContent() {
     };
 
     setTokenAndClose();
-  }, []);
+  }, [searchParams]);
   return <></>;
 }
 

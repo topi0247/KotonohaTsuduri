@@ -1,28 +1,25 @@
 "use client";
 import * as Motion from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useCallback, useEffect, useState } from "react";
 
 import { Top } from "@/components/layouts";
 import * as UI from "@/components/ui";
 import { Routes } from "@/config";
-import { useAuth, userState } from "@/hooks";
+import { useAuth } from "@/hooks";
 
 export default function Headers() {
   const { autoLogin } = useAuth();
   const [isOpen, toggleOpen] = Motion.useCycle(false, true);
   const [isVisible, setIsVisible] = useState(false);
-  const user = useRecoilValue(userState);
+
+  const fetchData = useCallback(async () => {
+    await autoLogin();
+  }, [autoLogin]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await autoLogin();
-    };
-    if (!user.isLogged) {
-      fetchData();
-    }
-  }, []);
+    fetchData();
+  }, [fetchData]);
 
   const handleToggle = () => {
     if (isOpen) {

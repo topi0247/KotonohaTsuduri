@@ -76,7 +76,7 @@ export const NavigationMenu = ({
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [handleToggle]);
 
   const isLogged = () => {
     return user.uuid !== "";
@@ -126,8 +126,8 @@ export const NavigationMenu = ({
           <>
             {/* マイページ */}
             <NavigationMenuItem
-              href={menuItems.user("1").href}
-              word={menuItems.user("1").word}
+              href={menuItems.user(user.uuid).href}
+              word={menuItems.user(user.uuid).word}
               handleToggle={handleToggle}
             />
 
