@@ -22,7 +22,10 @@ class Api::V1::UsersController < Api::V1::BasesController
     else
       tab_posts = posts
     end
-    render json: { posts: tab_posts.map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
+
+    page = params[:page].present? ? params[:page].to_i : 1
+
+    render json: { posts: tab_posts.per_page(page).map(&:as_custom_index_json), all_count: tab_posts.count }, status: :ok
   end
 
   def show_user
