@@ -46,7 +46,7 @@ export default function Notification() {
       variants={variants}
       initial="hidden"
       animate={notification.open ? "visible" : "hidden"}
-      className="fixed right-0 top-16 z-10 ml-auto w-2/3 max-w-72"
+      className={`fixed right-0 top-16 z-10 ml-auto w-2/3 max-w-72 ${notification.open ? "" : "hidden"}`}
     >
       <Mantine.Notification
         title={notification.title}

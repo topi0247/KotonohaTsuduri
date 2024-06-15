@@ -29,7 +29,14 @@ export default function Posts() {
 
   const pages = [];
   for (let i = 1; i <= cnt; i++) {
-    pages.push(<Letters key={i} index={i} onClick={handleClick} setPostsCount={setPostsCount} />);
+    pages.push(
+      <Letters
+        key={i}
+        url={`/posts?page=${i}`}
+        onClick={handleClick}
+        setPostsCount={setPostsCount}
+      />,
+    );
   }
 
   const fetchUserData = useCallback(async () => {
