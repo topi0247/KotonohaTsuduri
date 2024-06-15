@@ -79,18 +79,21 @@ export default function User({ params: { id } }: { params: { id: string } }) {
           <button className="rounded bg-sky-500 px-2 py-1 text-sm text-white">名前を変える</button>
         )}
       </section>
-      <section className="sticky my-4 text-center">
-        <SegmentedControl
-          value={tabType}
-          color="blue"
-          onChange={(value) => setTabType(value as TabType)}
-          data={[
-            { label: "１通目", value: TabType.First },
-            { label: "返信", value: TabType.Reply },
-          ]}
-        />
+      <section className="relative">
+        <div className="sticky top-0 z-10 my-4 text-center">
+          <SegmentedControl
+            value={tabType}
+            color="blue"
+            className="border border-sky-500"
+            onChange={(value) => setTabType(value as TabType)}
+            data={[
+              { label: "１通目", value: TabType.First },
+              { label: "返信", value: TabType.Reply },
+            ]}
+          />
+        </div>
+        {pages}
       </section>
-      <section>{pages}</section>
     </article>
   );
 }
