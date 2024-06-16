@@ -20,7 +20,7 @@ class Letter < ApplicationRecord
   end
 
   def set_default_name
-    self.name = "名もなき人"
+    self.name = "名もなき人" if name.blank?
   end
 
   def as_custom_json
