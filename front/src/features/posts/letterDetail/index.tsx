@@ -15,15 +15,15 @@ export const LetterDetail = memo(function LetterDetail({
 }: {
   page: number;
   uuid: string;
-  setPageCount?: (value: number) => void;
+  setPageCount: (value: number) => void;
 }) {
   const { data } = useSWR(`/posts/${uuid}?page=${page}`, fetcher);
 
   useEffect(() => {
-    if (data && setPageCount) {
+    if (data !== undefined) {
       setPageCount(data.all_count);
     }
-  }, []);
+  }, [data]);
 
   if (data === undefined) {
     return <p>ちょっとまってね</p>;

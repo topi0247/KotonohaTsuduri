@@ -40,7 +40,7 @@ export default function Reply({ params }: { params: { id: string } }) {
         type: NotificationType.SUCCESS,
       });
       mutate(`/posts/${id}`);
-      router.push(Routes.posts);
+      router.push(Routes.post(id));
     }
   }, [isPost, isPostAnimationComplete]);
 
