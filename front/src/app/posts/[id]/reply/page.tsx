@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { mutate } from "swr";
+import { useSWRConfig } from "swr";
 
 import * as UI from "@/components/ui";
 import { Routes } from "@/config";
@@ -21,6 +21,7 @@ export default function Reply({ params }: { params: { id: string } }) {
   const [pageCount, setPageCount] = useState(1);
   const [page, setPage] = useState(pageCount);
   const [name, setName] = useState("");
+  const { mutate } = useSWRConfig();
 
   const onChange = (value: number) => {
     setPage(value);
@@ -38,8 +39,8 @@ export default function Reply({ params }: { params: { id: string } }) {
         message: "手紙を返信しました",
         type: NotificationType.SUCCESS,
       });
-      mutate(`/posts/${id}/letter`);
-      router.push(Routes.post(id));
+      mutate(`/posts/${id}`);
+      router.push(Routes.posts);
     }
   }, [isPost, isPostAnimationComplete]);
 
