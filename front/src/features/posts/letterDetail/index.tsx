@@ -38,10 +38,12 @@ export const LetterDetail = memo(function LetterDetail({
       ) : (
         <section className="m-auto my-2 bg-white p-4 px-8">
           <p className="border-b border-sky-200 text-end">{data.letter.name} より</p>
-          <p className="border-b border-sky-200 pt-1 text-end text-sm text-gray-400">
+          <p className="border-b border-sky-200 text-end text-sm text-slate-400">
             {data.letter.created_at}
           </p>
-          <p className="lined-textarea whitespace-pre-wrap leading-7">{data.letter.sentences}</p>
+          <p className="lined-textarea h-full w-full whitespace-pre-wrap px-2">
+            {data.letter.sentences}
+          </p>
         </section>
       )}
     </>

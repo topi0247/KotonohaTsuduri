@@ -86,7 +86,7 @@ export default function Reply({ params }: { params: { id: string } }) {
         </div>
       </motion.article>
       <Drawer opened={openedLetter} onClose={closeLetter} position="bottom" size="md">
-        <div className="m-auto w-full max-w-[800px] border">
+        <div className="relative m-auto mb-8 w-full max-w-[800px] border">
           <LetterDetail page={page} uuid={id} setPageCount={setPageCount} />
         </div>
         <div style={{ display: "none" }}>
@@ -96,7 +96,7 @@ export default function Reply({ params }: { params: { id: string } }) {
             setPageCount={setPageCount}
           />
         </div>
-        <div className="pagination fixed bottom-0 left-0 m-auto flex w-full items-center justify-center">
+        <div className="pagination m-auto flex w-full items-center justify-center">
           <div className="rounded bg-sky-200 bg-opacity-50 p-4">
             <Pagination
               withEdges
